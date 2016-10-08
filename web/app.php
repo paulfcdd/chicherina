@@ -9,11 +9,13 @@ $app
         'assets.version_format' => '%s?version=%s',
         'assets.named_packages' => array(
             'css' => [
-                        'version' => 'css2',
-                        'base_path' => __DIR__ . '/css',
+                'base_path' => __DIR__ . '/css',
                     ],
             'images' => [
-                        'base_path' => __DIR__ . '/img'
+                'base_path' => __DIR__ . '/img',
+            ],
+            'js' => [
+                'base_path' => __DIR__ . '/js',
             ],
         ),
     ])
@@ -31,5 +33,53 @@ $app
         ]);
     })
     ->bind('home');
+
+$app
+    ->get('/news', function() use($app) {
+        return $app['twig']->render('news.twig', [
+            
+        ]);
+    })
+    ->bind('news');
+
+$app
+    ->get('/band', function () use($app){
+        return $app['twig']->render('band.twig', [
+            
+        ]);
+    })
+    ->bind('band');
+
+$app
+    ->get('/media', function () use($app){
+        return $app['twig']->render('media.twig', [
+
+        ]);
+    })
+    ->bind('media');
+
+$app
+    ->get('/press', function () use($app){
+        return $app['twig']->render('press.twig', [
+
+        ]);
+    })
+    ->bind('press');
+
+$app
+    ->get('/contacts', function () use($app){
+        return $app['twig']->render('contacts.twig', [
+
+        ]);
+    })
+    ->bind('contacts');
+
+$app
+    ->get('/rider', function () use($app){
+        return $app['twig']->render('rider.twig', [
+
+        ]);
+    })
+    ->bind('rider');
 
 $app->run();
