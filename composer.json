@@ -1,0 +1,10 @@
+{
+	"name": "Paul Novikov/Chicherina",
+	"license": "proprietary",
+    "type": "project",
+	"require": {
+		"silex/silex": "~2.0",
+		"twig/twig": "~1.26.1",
+		"symfony/twig-bridge": "~3.1.5"
+	}
+}
