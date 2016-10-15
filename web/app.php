@@ -35,12 +35,12 @@ $app
     ->bind('home');
 
 $app
-    ->get('/news', function() use($app) {
+    ->get('/placard', function() use($app) {
         return $app['twig']->render('news.twig', [
             
         ]);
     })
-    ->bind('news');
+    ->bind('placard');
 
 $app
     ->get('/band', function () use($app){
@@ -51,20 +51,12 @@ $app
     ->bind('band');
 
 $app
-    ->get('/media', function () use($app){
-        return $app['twig']->render('media.twig', [
+    ->get('/photos', function () use($app){
+        return $app['twig']->render('photos.twig', [
 
         ]);
     })
-    ->bind('media');
-
-$app
-    ->get('/press', function () use($app){
-        return $app['twig']->render('press.twig', [
-
-        ]);
-    })
-    ->bind('press');
+    ->bind('photos');
 
 $app
     ->get('/contacts', function () use($app){

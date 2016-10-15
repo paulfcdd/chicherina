@@ -1,3 +1,11 @@
+@font-face {
+  font-family: font-light;
+  src: url("../fonts/OpenSans-Light.ttf");
+}
+@font-face {
+  font-family: font-regular;
+  src: url("../fonts/OpenSans-Regular.ttf");
+}
 html {
   position: relative;
   min-height: 100%;
@@ -5,6 +13,8 @@ html {
 html body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  height: 100%;
+  font-family: font-regular;
 }
 html body .image {
   padding-top: 60px !important;
@@ -15,7 +25,7 @@ html body .image {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 25em !important;
+  min-height: 35em !important;
 }
 html body .text {
   padding: 15px 15px 0 !important;
@@ -32,6 +42,7 @@ html body .header {
 }
 html body .header li a {
   color: white !important;
+  text-transform: uppercase;
 }
 html body .header li a:hover {
   color: lightgrey !important;
@@ -43,10 +54,26 @@ html body #footer {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #191919;
+  padding-top: 20px;
 }
 html body #footer .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+html body #footer .container .social {
+  color: white;
+}
+html body #footer .container .social#fb:hover {
+  color: #3b5998;
+}
+html body #footer .container .social#vk:hover {
+  color: #507299;
+}
+html body #footer .container .social#twitter:hover {
+  color: #00aced;
+}
+html body #footer .container .social#youtube:hover {
+  color: #cc181e;
 }
 code {
   font-size: 80%;
