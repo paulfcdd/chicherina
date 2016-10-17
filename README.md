@@ -5,11 +5,10 @@ HOW TO INSTALL THIS SITE:
     HTTPS [https://github.com/paulfcdd/chicherina.git] 
    into directory which you need.
    
-2. Go to site path typing `cd chicherina/` and install composer.phar typing `php composer-install.php`
+2. Go to site path typing `cd chicherina/`
 
-3. Run `php composer.phar install`
+3. Run `php bin/composer.phar install`
 
 4. Go to path config and set configuration for DB-connection: 
-    `cd config`
-    `nano parameters.yml`
+    `nano config/parameters.yml`
     or use text editor you prefer
