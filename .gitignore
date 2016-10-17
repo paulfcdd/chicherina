@@ -1,5 +1,5 @@
 .idea/
-composer-setup.php
 vendor/
 logs/
-
+config/parameters.yml
+composer.phar
