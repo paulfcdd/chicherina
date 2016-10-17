@@ -38,6 +38,7 @@ html body .tour {
 }
 html body .tour .row {
   margin-top: 20px;
+  padding-bottom: 10px;
   border-bottom: 3px solid gainsboro;
 }
 html body > .container {
