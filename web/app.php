@@ -35,12 +35,12 @@ $app
     ->bind('home');
 
 $app
-    ->get('/placard', function() use($app) {
-        return $app['twig']->render('news.twig', [
+    ->get('/tour', function() use($app) {
+        return $app['twig']->render('tour.twig', [
             
         ]);
     })
-    ->bind('placard');
+    ->bind('tour');
 
 $app
     ->get('/band', function () use($app){

@@ -30,6 +30,16 @@ html body .image {
 html body .text {
   padding: 15px 15px 0 !important;
 }
+html body .tour {
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-left: 15px;
+  padding-right: 25px !important;
+}
+html body .tour .row {
+  margin-top: 20px;
+  border-bottom: 3px solid gainsboro;
+}
 html body > .container {
   padding: 60px 15px 0;
 }
@@ -68,9 +78,6 @@ html body #footer .container .social#fb:hover {
 }
 html body #footer .container .social#vk:hover {
   color: #507299;
-}
-html body #footer .container .social#twitter:hover {
-  color: #00aced;
 }
 html body #footer .container .social#youtube:hover {
   color: #cc181e;
