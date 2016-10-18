@@ -18,7 +18,6 @@ $app
     ])
 
     ->register(new Silex\Provider\AssetServiceProvider(), [
-        'assets.version' => 'v1',
         'assets.version_format' => '%s?version=%s',
         'assets.named_packages' => array(
             'css' => [
@@ -44,7 +43,7 @@ $app
 $app
     ->get('/', function () use ($app) {
         return $app['twig']->render('index.twig', [
-            'test' => 'Testowy hello',
+
         ]);
     })
     ->bind('home');
@@ -61,8 +60,10 @@ $app
 
 $app
     ->get('/band', function () use($app){
+        $sql = 'SELECT * FROM band';
+        $band = $app['db']->fetchAll($sql);
         return $app['twig']->render('band.twig', [
-            
+            'band' => $band,
         ]);
     })
     ->bind('band');

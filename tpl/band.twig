@@ -1,9 +1,31 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-    <div class="container">
-        <p>
-            группа
-        </p>
+    <div class="container band">
+        <div class="row text-center title">
+            <h4>состав группы</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            {% for singer in band %}
+                <div class="col-lg-2 col-xs-12 col-sm12 col-md-2">
+                    <div class="info-card" id="{{ singer.id }}">
+                        <img src="{{ asset(singer.photo) }}">
+                        <div class="singer-info text-center">
+                            <p>{{ singer.firstname }} {{ singer.lastname }}</p>
+                        </div>
+                        <div class="singer-role text-center">
+                            <p>{{ singer.role }}</p>
+                        </div>
+                        <div class="singer-social text-center">
+                            <a href="{{ singer.fb_link }}" class="social-icon facebook" target="_blank">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col-lg-1"></div>
+        </div>
     </div>
 {% endblock %}
