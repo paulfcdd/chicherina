@@ -1,31 +1,43 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-    <div class="container band">
-        <div class="row text-center title">
-            <h4>состав группы</h4>
-        </div>
-        <div class="row">
-            <div class="col-lg-1"></div>
-            {% for singer in band %}
-                <div class="col-lg-2 col-xs-12 col-sm12 col-md-2">
-                    <div class="info-card" id="{{ singer.id }}">
-                        <img src="{{ asset(singer.photo) }}">
-                        <div class="singer-info text-center">
-                            <p>{{ singer.firstname }} {{ singer.lastname }}</p>
-                        </div>
-                        <div class="singer-role text-center">
-                            <p>{{ singer.role }}</p>
-                        </div>
-                        <div class="singer-social text-center">
-                            <a href="{{ singer.fb_link }}" class="social-icon facebook" target="_blank">
-                                <i class="fa fa-facebook"></i>
-                            </a>
+    <div class="band">
+        <div class="container">
+            <div class="row text-center title">
+                <h4>состав группы</h4>
+            </div>
+            <div class="row band-list">
+                <div class="col-lg-1 hidden-xs"></div>
+                {% for singer in band %}
+                    <div class="col-lg-2 col-xs-12 col-sm12 col-md-2">
+                        <div class="info-card" id="{{ singer.id }}">
+                            <div class="singer-photo text-center">
+                                {% if singer.photo == null %}
+                                    <img src="{{ asset('img/band/no_avatar.svg') }}"
+                                         title="{{ singer.firstname }} {{ singer.lastname }}"
+                                         alt="{{ singer.firstname }} {{ singer.lastname }}">
+                                    {% else %}
+                                        <img src="{{ asset(singer.photo) }}"
+                                             title="{{ singer.firstname }} {{ singer.lastname }}"
+                                             alt="{{ singer.firstname }} {{ singer.lastname }}">
+                                {% endif %}
+                            </div>
+                            <div class="singer-info text-center">
+                                <p>{{ singer.firstname }} {{ singer.lastname }}</p>
+                            </div>
+                            <div class="singer-role text-center">
+                                <p>{{ singer.role }}</p>
+                            </div>
+                            <div class="singer-social text-center">
+                                <a href="{{ singer.fb_link }}" class="social-icon facebook" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-            <div class="col-lg-1"></div>
+                {% endfor %}
+                <div class="col-lg-1 hidden-xs"></div>
+            </div>
         </div>
     </div>
 {% endblock %}

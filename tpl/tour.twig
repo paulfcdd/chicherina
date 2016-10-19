@@ -1,21 +1,21 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-    <div class="container tour">
-
-        {% for tour in tours %}
-            <div class="row">
-                <div class="col-lg-2 col-xs-4 date">
-                    <p>{{ tour.date }}</p>
+    <div class="tour">
+        <div class="container">
+            {% for tour in tours %}
+                <div class="row">
+                    <div class="col-lg-2 col-xs-4 date">
+                        <p>{{ tour.date }}</p>
+                    </div>
+                    <div class="col-lg-8 col-xs-4 city">
+                        <p class="center-block">{{ tour.city }}</p>
+                    </div>
+                    <div class="col-lg-2 col-xs-4 location">
+                        <p class="pull-right">{{ tour.location }}</p>
+                    </div>
                 </div>
-                <div class="col-lg-8 col-xs-4 city">
-                    <p class="center-block">{{ tour.city }}</p>
-                </div>
-                <div class="col-lg-2 col-xs-4 location">
-                    <p class="pull-right">{{ tour.location }}</p>
-                </div>
-            </div>
-        {% endfor %}
-
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
