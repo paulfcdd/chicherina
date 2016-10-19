@@ -34,6 +34,17 @@ body .wrapper .header {
   margin-bottom: 0;
   border-radius: 0;
 }
+html .wrapper .header .site-logo,
+body .wrapper .header .site-logo {
+  text-transform: uppercase;
+  font-family: font-regular;
+  font-weight: 600;
+  color: white;
+}
+html .wrapper .header .site-logo:hover,
+body .wrapper .header .site-logo:hover {
+  color: lightgrey;
+}
 html .wrapper .header li a,
 body .wrapper .header li a {
   color: white !important;

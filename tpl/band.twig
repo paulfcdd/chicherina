@@ -7,9 +7,9 @@
                 <h4>состав группы</h4>
             </div>
             <div class="row band-list">
-                <div class="col-lg-1 hidden-xs"></div>
+                <div class="col-lg-1 hidden-xs hidden-sm hidden-md"></div>
                 {% for singer in band %}
-                    <div class="col-lg-2 col-xs-12 col-sm12 col-md-2">
+                    <div class="col-lg-2 col-xs-12 col-sm12 col-md-4">
                         <div class="info-card" id="{{ singer.id }}">
                             <div class="singer-photo text-center">
                                 {% if singer.photo == null %}
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 {% endfor %}
-                <div class="col-lg-1 hidden-xs"></div>
+                <div class="col-lg-1 hidden-xs hidden-sm hidden-md"></div>
             </div>
         </div>
     </div>

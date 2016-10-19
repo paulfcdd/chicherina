@@ -34,6 +34,18 @@ body {
       background-color: #2f2f2f;
       margin-bottom: 0;
       border-radius: 0;
+
+      .site-logo {
+        text-transform: uppercase;
+        font-family: font-regular;
+        font-weight: 600;
+        color: white;
+
+        &:hover{
+          color: lightgrey;
+        }
+      }
+
       li {
         a {
           color: white !important;
@@ -206,14 +218,14 @@ body {
 @media @mobile {
   .wrapper {
     .band {
-      .container{
+      .container {
 
         .title {
           padding-bottom: 1em !important;
         }
 
         .row {
-         margin: 0;
+          margin: 0;
         }
 
         .band-list {
