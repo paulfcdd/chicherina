@@ -1,0 +1,224 @@
+@font-face {
+  font-family: font-light;
+  src: url("../fonts/OpenSans-Light.ttf");
+}
+@font-face {
+  font-family: font-regular;
+  src: url("../fonts/OpenSans-Regular.ttf");
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+html .wrapper,
+body .wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  font: 14px/20px Arial, sans-serif;
+}
+html .wrapper .text,
+body .wrapper .text {
+  padding: 15px 15px 0 !important;
+}
+html .wrapper .header,
+body .wrapper .header {
+  border-color: transparent;
+  background-color: #2f2f2f;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+html .wrapper .header .site-logo,
+body .wrapper .header .site-logo {
+  text-transform: uppercase;
+  font-family: font-regular;
+  font-weight: 600;
+  color: white;
+}
+html .wrapper .header .site-logo:hover,
+body .wrapper .header .site-logo:hover {
+  color: lightgrey;
+}
+html .wrapper .header li a,
+body .wrapper .header li a {
+  color: white !important;
+  text-transform: uppercase;
+}
+html .wrapper .header li a:hover,
+body .wrapper .header li a:hover {
+  color: lightgrey !important;
+}
+html .wrapper .index,
+body .wrapper .index {
+  flex: 1 0 auto;
+  padding-top: 60px !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  background: url("../img/index_photo.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+html .wrapper .tour,
+body .wrapper .tour {
+  flex: 1 0 auto;
+  margin-top: 60px;
+}
+html .wrapper .tour .container,
+body .wrapper .tour .container {
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-left: 15px;
+  padding-right: 25px !important;
+}
+html .wrapper .tour .container .row,
+body .wrapper .tour .container .row {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid gainsboro;
+}
+html .wrapper .photos,
+body .wrapper .photos {
+  flex: 1 0 auto;
+  margin-top: 60px;
+}
+html .wrapper .band,
+body .wrapper .band {
+  flex: 1 0 auto;
+  margin-top: 60px;
+}
+html .wrapper .band .container,
+body .wrapper .band .container {
+  padding: 2em 0 2em 0 !important;
+}
+html .wrapper .band .container .title,
+body .wrapper .band .container .title {
+  text-transform: uppercase;
+  font-size: 16pt;
+  font-weight: 600;
+  padding-bottom: 2em;
+}
+html .wrapper .band .container .band-list .info-card .singer-photo,
+body .wrapper .band .container .band-list .info-card .singer-photo {
+  margin-bottom: 10px;
+}
+html .wrapper .band .container .band-list .info-card .singer-photo img,
+body .wrapper .band .container .band-list .info-card .singer-photo img {
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+}
+html .wrapper .band .container .band-list .info-card .singer-info p,
+body .wrapper .band .container .band-list .info-card .singer-info p {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 10pt;
+  white-space: nowrap;
+}
+html .wrapper .band .container .band-list .info-card .singer-role p,
+body .wrapper .band .container .band-list .info-card .singer-role p {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 9pt;
+  white-space: nowrap;
+  color: darkgrey;
+}
+html .wrapper .band .container .band-list .info-card .singer-social,
+body .wrapper .band .container .band-list .info-card .singer-social {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+html .wrapper .band .container .band-list .info-card .singer-social a,
+body .wrapper .band .container .band-list .info-card .singer-social a {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  padding: 10px 0;
+  margin: 0 5px;
+  overflow: hidden;
+  text-align: center;
+  background-color: #d7d7d7;
+  border-radius: 40px;
+}
+html .wrapper .band .container .band-list .info-card .singer-social .facebook,
+body .wrapper .band .container .band-list .info-card .singer-social .facebook {
+  color: #3b5a9a !important;
+}
+html .wrapper .band .container .band-list .info-card .singer-social .facebook:hover,
+body .wrapper .band .container .band-list .info-card .singer-social .facebook:hover {
+  background-color: #3b5a9a !important;
+}
+html .wrapper .band .container .band-list .info-card .singer-social .social-icon,
+body .wrapper .band .container .band-list .info-card .singer-social .social-icon {
+  text-decoration: none !important;
+  box-shadow: 0px 0px 1px #333333;
+  box-shadow: 0px 0px 1px rgba(51, 51, 51, 0.7);
+}
+html .wrapper .band .container .band-list .info-card .singer-social .social-icon:hover,
+body .wrapper .band .container .band-list .info-card .singer-social .social-icon:hover {
+  color: #ffffff !important;
+}
+html .wrapper .contacts,
+body .wrapper .contacts {
+  flex: 1 0 auto;
+  margin-top: 60px;
+}
+html .wrapper .rider,
+body .wrapper .rider {
+  flex: 1 0 auto;
+  margin-top: 60px;
+}
+html .wrapper .footer,
+body .wrapper .footer {
+  flex: 0 0 auto;
+  height: 60px;
+  background-color: #191919;
+  padding-top: 20px;
+}
+html .wrapper .footer .container,
+body .wrapper .footer .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+html .wrapper .footer .container .social,
+body .wrapper .footer .container .social {
+  color: white;
+  padding: 0 10px;
+}
+html .wrapper .footer .container .social#fb:hover,
+body .wrapper .footer .container .social#fb:hover {
+  color: #3b5998;
+}
+html .wrapper .footer .container .social#vk:hover,
+body .wrapper .footer .container .social#vk:hover {
+  color: #507299;
+}
+html .wrapper .footer .container .social#youtube:hover,
+body .wrapper .footer .container .social#youtube:hover {
+  color: #cc181e;
+}
+@media only screen and (max-width: 767px) {
+  .wrapper .band .container .title {
+    padding-bottom: 1em !important;
+  }
+  .wrapper .band .container .row {
+    margin: 0;
+  }
+  .wrapper .band .container .band-list .info-card {
+    margin-bottom: 25px;
+  }
+  .wrapper .band .container .band-list .info-card .singer-social {
+    margin-top: 0 !important;
+  }
+}
+code {
+  font-size: 80%;
+}

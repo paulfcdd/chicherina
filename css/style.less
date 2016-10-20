@@ -1,0 +1,417 @@
+@font-face {
+  font-family: font-light;
+  src: url("../fonts/OpenSans-Light.ttf");
+}
+
+@font-face {
+  font-family: font-regular;
+  src: url("../fonts/OpenSans-Regular.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    font: 14px/20px Arial, sans-serif;
+
+    .text {
+      padding: 15px 15px 0 !important;
+    }
+
+    .header {
+      border-color: transparent;
+      background-color: #2f2f2f;
+      margin-bottom: 0;
+      border-radius: 0;
+
+      .site-logo {
+        text-transform: uppercase;
+        font-family: font-regular;
+        font-weight: 600;
+        color: white;
+
+        &:hover{
+          color: lightgrey;
+        }
+      }
+
+      li {
+        a {
+          color: white !important;
+          text-transform: uppercase;
+
+          &:hover {
+            color: lightgrey !important;
+          }
+        }
+      }
+    }
+    .index {
+      flex: 1 0 auto;
+      padding-top: 60px !important;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+      background: url("../img/index_photo.jpg") no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    .tour {
+      flex: 1 0 auto;
+      margin-top: 60px;
+
+      .container {
+        font-size: 16px;
+        text-transform: uppercase;
+        padding-left: 15px;
+        padding-right: 25px !important;
+        .row {
+          margin-top: 20px;
+          padding-bottom: 10px;
+          border-bottom: 3px solid gainsboro;
+        }
+      }
+    }
+    .photos {
+      flex: 1 0 auto;
+      margin-top: 60px;
+    }
+    .band {
+      flex: 1 0 auto;
+      margin-top: 60px;
+
+      .container {
+        padding: 2em 0 2em 0 !important;
+
+        .title {
+          text-transform: uppercase;
+          font-size: 16pt;
+          font-weight: 600;
+          padding-bottom: 2em;
+        }
+
+        .band-list {
+          .info-card {
+
+            .singer-photo {
+              margin-bottom: 10px;
+              img {
+                border-radius: 50%;
+                width: 170px;
+                height: 170px;
+              }
+            }
+
+            .singer-info {
+              p {
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 10pt;
+                white-space: nowrap;
+              }
+            }
+
+            .singer-role {
+              p {
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 9pt;
+                white-space: nowrap;
+                color: darkgrey;
+              }
+            }
+
+            .singer-social {
+              list-style: none;
+              padding: 0;
+              margin-top: 25px;
+              a {
+                position: relative;
+                display: inline-block;
+                min-width: 40px;
+                padding: 10px 0;
+                margin: 0 5px;
+                overflow: hidden;
+                text-align: center;
+                background-color: rgb(215, 215, 215);
+                border-radius: 40px;
+              }
+
+              .facebook {
+                color: rgb(59, 90, 154) !important;
+
+                &:hover {
+                  background-color: rgb(59, 90, 154) !important;
+                }
+              }
+
+              .social-icon {
+                text-decoration: none !important;
+                box-shadow: 0px 0px 1px rgb(51, 51, 51);
+                box-shadow: 0px 0px 1px rgba(51, 51, 51, 0.7);
+
+                &:hover {
+                  color: rgb(255, 255, 255) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .contacts {
+      flex: 1 0 auto;
+      margin-top: 60px;
+    }
+    .rider {
+      flex: 1 0 auto;
+      margin-top: 60px;
+    }
+
+    .footer {
+      flex: 0 0 auto;
+      height: 60px;
+      background-color: #191919;
+      padding-top: 20px;
+
+      .container {
+        padding-right: 15px;
+        padding-left: 15px;
+
+        .social {
+          color: white;
+          padding: 0 10px;
+
+          &#fb:hover {
+            color: #3b5998;
+          }
+          &#vk:hover {
+            color: #507299;
+          }
+          &#youtube:hover {
+            color: #cc181e;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mobile: ~"only screen and (max-width: 767px)";
+@mobile-landscape: ~"only screen and (max-width: 767px) and (orientation: landscape)";
+@tablet: ~"only screen and (min-width: 768px) and (max-width: 992px)";
+@desktop: ~"only screen and (min-width: 993px) and (max-width: 1599px)";
+@hdscreen: ~"only screen and (min-width: 1600px)";
+
+@media @mobile {
+  .wrapper {
+    .band {
+      .container {
+
+        .title {
+          padding-bottom: 1em !important;
+        }
+
+        .row {
+          margin: 0;
+        }
+
+        .band-list {
+          .info-card {
+            margin-bottom: 25px;
+
+            .singer-social {
+              margin-top: 0 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+code {
+  font-size: 80%;
+}
+
+//html {
+//  position: relative;
+//  min-height: 100%;
+//  //height: 100%;
+//
+//  body {
+//    /* Margin bottom by footer height */
+//    margin-bottom: 60px;
+//    height: 100%;
+//    font-family: font-regular;
+//
+//    .image {
+//      padding-top: 60px !important;
+//      padding-right: 0 !important;
+//      padding-left: 0 !important;
+//      background: url("../img/index_photo.jpg") no-repeat center center fixed;
+//      -webkit-background-size: cover;
+//      -moz-background-size: cover;
+//      -o-background-size: cover;
+//      background-size: cover;
+//      min-height: 35em !important;
+//
+//    }
+//
+//    .text {
+//      padding: 15px 15px 0 !important;
+//    }
+//
+//    .tour {
+//      font-size: 16px;
+//      text-transform: uppercase;
+//      padding-left: 15px;
+//      padding-right: 25px !important;
+//
+//      .row{
+//        margin-top: 20px;
+//        padding-bottom: 10px;
+//        border-bottom: 3px solid gainsboro;
+//      }
+//    }
+//
+//    .band {
+//
+//      padding: 5em 0 5em 0 !important;
+//
+//      .title {
+//        text-transform: uppercase;
+//        font-size: 16pt;
+//        font-weight: 600;
+//        padding-bottom: 2em;
+//      }
+//
+//      .row {
+//        .info-card {
+//
+//          img {
+//            width: 100%;
+//          }
+//
+//          .singer-info {
+//            p {
+//              text-transform: uppercase;
+//              font-weight: 600;
+//              font-size: 10pt;
+//              white-space: nowrap;
+//            }
+//          }
+//
+//          .singer-role {
+//            p {
+//              text-transform: uppercase;
+//              font-weight: 600;
+//              font-size: 9pt;
+//              white-space: nowrap;
+//              color: darkgrey;
+//            }
+//          }
+//
+//          .singer-social {
+//            list-style: none;
+//            padding: 0;
+//            margin-top: 25px;
+//            a {
+//              position: relative;
+//              display: inline-block;
+//              min-width: 40px;
+//              padding: 10px 0;
+//              margin: 0 5px;
+//              overflow: hidden;
+//              text-align: center;
+//              background-color: rgb(215, 215, 215);
+//              border-radius: 40px;
+//            }
+//
+//            .facebook {
+//              color: rgb(59, 90, 154) !important;
+//
+//              &:hover{
+//                background-color: rgb(59, 90, 154) !important;
+//              }
+//            }
+//
+//            .social-icon{
+//              text-decoration: none !important;
+//              box-shadow: 0px 0px 1px rgb(51, 51, 51);
+//              box-shadow: 0px 0px 1px rgba(51, 51, 51, 0.7);
+//
+//              &:hover{
+//                color: rgb(255, 255, 255) !important;
+//              }
+//            }
+//          }
+//        }
+//      }
+//    }
+//
+//    > .container {
+//      padding: 60px 15px 0;
+//    }
+//    .text-muted {
+//      margin: 20px 0;
+//    }
+//
+//    .header {
+//      border-color: transparent !important;
+//      background-color: #2f2f2f;
+//      li {
+//        a {
+//          color: white !important;
+//          text-transform: uppercase;
+//
+//          &:hover {
+//            color: lightgrey !important;
+//          }
+//        }
+//      }
+//    }
+//
+//    #footer {
+//      position: absolute;
+//      bottom: 0;
+//      width: 100%;
+//      /* Set the fixed height of the footer here */
+//      height: 60px;
+//      background-color: #191919;
+//      padding-top: 20px;
+//
+//      .container {
+//        padding-right: 15px;
+//        padding-left: 15px;
+//
+//        .social {
+//          color: white;
+//          &#fb:hover{
+//            color: #3b5998;
+//          }
+//          &#vk:hover{
+//            color: #507299;
+//          }
+//          &#youtube:hover{
+//            color: #cc181e;
+//          }
+//        }
+//
+//      }
+//    }
+//  }
+//}
+//

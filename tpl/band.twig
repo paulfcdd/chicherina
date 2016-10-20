@@ -13,7 +13,7 @@
                         <div class="info-card" id="{{ singer.id }}">
                             <div class="singer-photo text-center">
                                 {% if singer.photo == null %}
-                                    <img src="{{ asset('img/band/no_avatar.svg') }}"
+                                    <img src="{{ asset('/img/band/no_avatar.svg') }}"
                                          title="{{ singer.firstname }} {{ singer.lastname }}"
                                          alt="{{ singer.firstname }} {{ singer.lastname }}">
                                     {% else %}
