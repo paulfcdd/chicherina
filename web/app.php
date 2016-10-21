@@ -1,10 +1,10 @@
 <?php
-include_once __DIR__ . '/vendor/autoload.php';
+include_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Silex\Application();
 $app['debug'] = true;
 $app
-    ->register(new Rpodwika\Silex\YamlConfigServiceProvider(__DIR__ . '/config/parameters.yml'))
+    ->register(new Rpodwika\Silex\YamlConfigServiceProvider(__DIR__ . '/../config/parameters.yml'))
 
     ->register(new Silex\Provider\DoctrineServiceProvider(), [
         'db.options' => [
@@ -21,10 +21,10 @@ $app
         'assets.version_format' => '%s?version=%s',
         'assets.named_packages' => array(
             'css' => [
-                'base_path' => __DIR__ . 'web/css',
+                'base_path' => __DIR__ . '/css',
             ],
             'images' => [
-                'base_path' => __DIR__ . 'web/img',
+                'base_path' => __DIR__ . '/img',
             ],
             'js' => [
                 'base_path' => __DIR__ . '/js',
@@ -33,11 +33,11 @@ $app
     ])
 
     ->register(new Silex\Provider\MonologServiceProvider(), [
-        'monolog.logfile' => __DIR__ . '/logs/dev.log'
+        'monolog.logfile' => __DIR__ . '/../logs/dev.log'
     ])
 
     ->register(new Silex\Provider\TwigServiceProvider(), [
-        'twig.path' => __DIR__ . '/tpl',
+        'twig.path' => __DIR__ . '/../tpl',
     ]);
 
 $app
