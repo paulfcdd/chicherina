@@ -4,6 +4,18 @@ include_once __DIR__ . '/../vendor/autoload.php';
 $app = new Silex\Application();
 $app['debug'] = true;
 $app
+	->register(new Silex\Provider\SecurityServiceProvider(), [
+		'security.firewalls' => $app['security.firewalls'] = [
+			'admin' => array(
+				'pattern' => '^/admin',
+				'http' => true,
+				'users' => array(
+					// raw password is foo
+					'admin' => array('ROLE_ADMIN', '$2y$10$3i9/lVd8UOFIJ6PAMFt8gu3/r5g0qeCJvoSlLCsvMTythye19F77a'),
+				),
+			),
+		],
+	])
     ->register(new Rpodwika\Silex\YamlConfigServiceProvider(__DIR__ . '/../config/parameters.yml'))
 
     ->register(new Silex\Provider\DoctrineServiceProvider(), [
@@ -39,6 +51,10 @@ $app
     ->register(new Silex\Provider\TwigServiceProvider(), [
         'twig.path' => __DIR__ . '/../tpl',
     ]);
+
+$app->boot();
+
+//$token = $app['security.token_storage']->getToken();
 
 $app
     ->get('/', function () use ($app) {
@@ -91,5 +107,13 @@ $app
         ]);
     })
     ->bind('rider');
+
+$app
+	->get('/admin', function () use($app) {
+		return $app['twig']->render('admin.twig', [
+
+		]);
+	})
+	->bind('admin');
 
 $app->run();
