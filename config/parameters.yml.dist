@@ -1,6 +1,16 @@
 database:
     driver: pdo_mysql
-    host: 127.0.0.1
-    db_name: chicherina_db
-    db_user: root
-    db_password: null
+    host: s23.x-host.net.ua
+    db_name: novasoft_chicherina
+    db_user: novasoft_paul
+    db_password: ctrnjh
+
+root.setup:
+    pattern: '^/root'
+    login_path: '/login'
+    check_path: '/root/login_check'
+    redirect_path: '/root'
+    username: 'root'
+    role: 'ROLE_ROOT'
+    password: 'ctrnjh'
+    logout_path: '/root/logout'
