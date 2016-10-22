@@ -176,6 +176,32 @@ body .wrapper .rider {
   flex: 1 0 auto;
   margin-top: 60px;
 }
+html .wrapper .login,
+body .wrapper .login {
+  flex: 1 0 auto;
+  margin: 0 auto;
+  background-color: lightgrey;
+  width: 100%;
+}
+html .wrapper .login .login-form,
+body .wrapper .login .login-form {
+  width: 500px;
+  padding: 20px;
+  position: absolute;
+  left: 10% !important;
+  right: 10% !important;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+}
+html .wrapper .root,
+body .wrapper .root {
+  flex: 1 0 auto;
+}
+html .wrapper .root .modal-content,
+body .wrapper .root .modal-content {
+  border-radius: 0;
+}
 html .wrapper .footer,
 body .wrapper .footer {
   flex: 0 0 auto;
