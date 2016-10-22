@@ -3,64 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Чичерина</title>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
     <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/fonts/fa/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('/js/jquery-3.1.1.min.js') }}"></script>
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
-    <div class="navbar navbar-default navbar-fixed-top header" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand site-logo" href="{{ path('home') }}">Чичерина</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav hidden-xs hidden-sm pull-right">
-                    <li><a href="{{ path('tour') }}">Афиша</a></li>
-                    <li><a href="{{ path('band') }}">Группа</a></li>
-                    <li><a href="{{ path('photos') }}">Фото</a></li>
-                    <li><a href="{{ path('contacts') }}">Контакты</a></li>
-                    <li><a href="{{ path('rider') }}">Райдер</a></li>
-                </ul>
-                <ul class="nav navbar-nav hidden-lg hidden-md">
-                    <li><a href="{{ path('tour') }}">Афиша</a></li>
-                    <li><a href="{{ path('band') }}">Группа</a></li>
-                    <li><a href="{{ path('photos') }}">Фото</a></li>
-                    <li><a href="{{ path('contacts') }}">Контакты</a></li>
-                    <li><a href="{{ path('rider') }}">Райдер</a></li>
-                </ul>
+    {% block header %}
+        <div class="navbar navbar-default navbar-fixed-top header" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand site-logo" href="{{ path('home') }}">Чичерина</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav hidden-xs hidden-sm pull-right">
+                        <li><a href="{{ path('tour') }}">Афиша</a></li>
+                        <li><a href="{{ path('band') }}">Группа</a></li>
+                        <li><a href="{{ path('photos') }}">Фото</a></li>
+                        <li><a href="{{ path('contacts') }}">Контакты</a></li>
+                        <li><a href="{{ path('rider') }}">Райдер</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav hidden-lg hidden-md">
+                        <li><a href="{{ path('tour') }}">Афиша</a></li>
+                        <li><a href="{{ path('band') }}">Группа</a></li>
+                        <li><a href="{{ path('photos') }}">Фото</a></li>
+                        <li><a href="{{ path('contacts') }}">Контакты</a></li>
+                        <li><a href="{{ path('rider') }}">Райдер</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    {% endblock %}
 
     {% block content %}
     {% endblock %}
 
-    <div class="footer">
-        <div class="container">
-            <div class="col-lg-4 col-md-4 hidden-xs hidden-sm"></div>
-            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 text-center">
-                <ul class="list-unstyled list-inline">
-                    <li><a href="#" class="social" id="fb"><i class="fa fa-facebook fa-2x"></i></a></li>
-                    <li><a href="#" class="social" id="vk"><i class="fa fa-vk fa-2x"></i></a></li>
-                    <li><a href="#" class="social" id="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
-                </ul>
+    {% block footer %}
+        <div class="footer">
+            <div class="container">
+                <div class="col-lg-4 col-md-4 hidden-xs hidden-sm"></div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li><a href="#" class="social" id="fb"><i class="fa fa-facebook fa-2x"></i></a></li>
+                        <li><a href="#" class="social" id="vk"><i class="fa fa-vk fa-2x"></i></a></li>
+                        <li><a href="#" class="social" id="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 hidden-xs hidden-sm"></div>
             </div>
-            <div class="col-lg-4 col-md-4 hidden-xs hidden-sm"></div>
         </div>
-    </div>
-
+    {% endblock %}
 </div>
 </body>
+<script src="{{ asset('/js/jquery-3.1.1.min.js') }}"></script>
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 </html>

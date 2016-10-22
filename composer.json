@@ -10,6 +10,16 @@
 		"symfony/asset": "~3.1.5",
 		"symfony/yaml": "~3.1.5",
 		"rpodwika/yaml-config-service-provider": "~1.0.1",
-		"doctrine/dbal": "~2.5.5"
-	}
+		"doctrine/dbal": "~2.5.5",
+		"symfony/security": "~3.1.5"
+	},
+	 "extra": {
+        "bin-dir": "bin",
+        "web-dir": "web",
+        "tests-dir": "tests",
+        "assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "config/parameters.yml"
+        }
+    }
 }

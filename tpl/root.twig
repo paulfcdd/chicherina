@@ -1,0 +1,87 @@
+{% extends 'base.twig' %}
+
+{% block title %}
+    Welcome to root path
+{% endblock %}
+
+{% block header %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('root') }}">Чичерина - корневая директория</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ path('home') }}" target="_blank">
+                            <span class="fa fa-home"></span>&nbsp;На сайт
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('root_logout') }}">
+                            <span class="fa fa-sign-out"></span>&nbsp;Выход
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="root">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#admins">Админы</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="admins" class="tab-pane fade in active">
+                    {% if admins == null %}
+                        <div class="alert alert-warning">
+                            <strong>Внимание!</strong> Нет пользователей с правами администратора.
+
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#addAdmin">
+                                <span class="fa fa-plus"></span>&nbsp;Добавить
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="addAdmin" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Новый администратор</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

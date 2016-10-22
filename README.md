@@ -7,7 +7,8 @@ HOW TO INSTALL THIS SITE:
    
 2. Go to site path typing `cd chicherina/`
 
-3. Run `php bin/composer.phar install`
+3. Run `php bin/composer.phar install` or `composer install` if you have recently 
+   add composer.phar to PATH variable 
 
 4. Go to path config and set configuration for DB-connection: 
     `nano config/parameters.yml`
