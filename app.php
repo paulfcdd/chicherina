@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . '/../vendor/autoload.php';
-include_once __DIR__ . '/../app/services/UserProvider.php';
+include_once __DIR__ . '/vendor/autoload.php';
+include_once __DIR__ . '/app/services/UserProvider.php';
 
 use Services\UserProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,22 +9,7 @@ $app = new Silex\Application();
 $app['debug'] = true;
 $app
     ->register(new Silex\Provider\SessionServiceProvider())
-    ->register(new Silex\Provider\SecurityServiceProvider(), [
-        'security.firewalls' => [
-            'root' => array(
-                'pattern' => '^/root',
-                'form' => array('login_path' => '/login', 'check_path' => '/root/login_check'),
-                'users' => array(
-                    'root' => array('ROLE_ROOT', password_hash('ctrnjh', PASSWORD_BCRYPT)),
-                ),
-                'logout' => [
-                    'logout_path' => '/root/logout',
-                    'invalidate_session' => true
-                ],
-            ),
-        ],
-    ])
-    ->register(new Rpodwika\Silex\YamlConfigServiceProvider(__DIR__ . '/../config/parameters.yml'))
+    ->register(new Rpodwika\Silex\YamlConfigServiceProvider(__DIR__ . '/config/parameters.yml'))
     ->register(new Silex\Provider\DoctrineServiceProvider(), [
         'db.options' => [
             'driver' => $app['config']['database']['driver'],
@@ -39,21 +24,44 @@ $app
         'assets.version_format' => '%s?version=%s',
         'assets.named_packages' => array(
             'css' => [
-                'base_path' => __DIR__ . '/css',
+                'base_path' => __DIR__ . '/web/css',
             ],
             'images' => [
-                'base_path' => __DIR__ . '/img',
+                'base_path' => __DIR__ . '/web/img',
             ],
             'js' => [
-                'base_path' => __DIR__ . '/js',
+                'base_path' => __DIR__ . '/web/js',
             ],
         ),
     ])
+    ->register(new Silex\Provider\SecurityServiceProvider(), [
+        'security.firewalls' => [
+            'root' => array(
+                'pattern' => $app['config']['root.setup']['pattern'],
+                'form' => array(
+                    'login_path' => $app['config']['root.setup']['login_path'],
+                    'check_path' => $app['config']['root.setup']['check_path'],
+                    'always_use_default_target_path' => true,
+                    'default_target_path' =>  $app['config']['root.setup']['redirect_path']
+                ),
+                'users' => array(
+                    $app['config']['root.setup']['username'] => array(
+                        $app['config']['root.setup']['role'],
+                        password_hash($app['config']['root.setup']['password'], PASSWORD_BCRYPT)
+                    ),
+                ),
+                'logout' => [
+                    'logout_path' => $app['config']['root.setup']['logout_path'],
+                    'invalidate_session' => true
+                ],
+            ),
+        ],
+    ])
     ->register(new Silex\Provider\MonologServiceProvider(), [
-        'monolog.logfile' => __DIR__ . '/../logs/dev.log'
+        'monolog.logfile' => __DIR__ . '/logs/dev.log'
     ])
     ->register(new Silex\Provider\TwigServiceProvider(), [
-        'twig.path' => __DIR__ . '/../tpl',
+        'twig.path' => __DIR__ . '/tpl',
     ]);
 
 $app->boot();
@@ -112,6 +120,9 @@ $app
 
 $app
     ->get('/root', function () use ($app) {
+//        echo "<pre>";
+//        var_dump($app['security.authorization_checker']->isGranted('ROLE_ROOT'));
+//        echo "</pre>";
         $sql = "SELECT * FROM `users` WHERE role = 'ROLE_ADMIN'";
         $admins = $app['db']->fetchAll($sql);
         return $app['twig']->render('root.twig', [
@@ -119,6 +130,12 @@ $app
         ]);
     })
     ->bind('root');
+
+$app
+    ->get('/add_admin', function () use ($app) {
+        var_dump($_POST);
+    })
+    ->bind('add_admin');
 
 $app
     ->get('/login', function (Request $request) use ($app) {
