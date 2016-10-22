@@ -121,6 +121,12 @@ $app
     ->bind('root');
 
 $app
+    ->get('/add_admin', function () use ($app) {
+        var_dump($_POST);
+    })
+    ->bind('add_admin');
+
+$app
     ->get('/login', function (Request $request) use ($app) {
         return $app['twig']->render('login.twig', [
             'error'         => $app['security.last_error']($request),
