@@ -1,9 +1,9 @@
 database:
     driver: pdo_mysql
-    host: s23.x-host.net.ua
-    db_name: novasoft_chicherina
-    db_user: novasoft_paul
-    db_password: ctrnjh
+    host: localhost
+    db_name: chicherina
+    db_user: root
+    db_password: nulll
 
 root.setup:
     pattern: '^/root'

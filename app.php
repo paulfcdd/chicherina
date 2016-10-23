@@ -2,14 +2,15 @@
 include_once __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . '/app/services/UserProvider.php';
 
-use Services\UserProvider;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Services\UserProvider;
 
 $app = new Silex\Application();
 $app['debug'] = true;
 $app
-    ->register(new Silex\Provider\SessionServiceProvider())
     ->register(new Rpodwika\Silex\YamlConfigServiceProvider(__DIR__ . '/config/parameters.yml'))
+    ->register(new Silex\Provider\SessionServiceProvider())
     ->register(new Silex\Provider\DoctrineServiceProvider(), [
         'db.options' => [
             'driver' => $app['config']['database']['driver'],
@@ -42,7 +43,7 @@ $app
                     'login_path' => $app['config']['root.setup']['login_path'],
                     'check_path' => $app['config']['root.setup']['check_path'],
                     'always_use_default_target_path' => true,
-                    'default_target_path' =>  $app['config']['root.setup']['redirect_path']
+                    'default_target_path' => $app['config']['root.setup']['redirect_path']
                 ),
                 'users' => array(
                     $app['config']['root.setup']['username'] => array(
@@ -55,6 +56,22 @@ $app
                     'invalidate_session' => true
                 ],
             ),
+            'admin' => [
+                'pattern' => '^/dashboard',
+                'form' => [
+                    'login_path' => '/admin',
+                    'check_path' => '/dashboard/login_check',
+                    'always_use_default_target_path' => true,
+                    'default_target_path' => '/dashboard',
+                ],
+                'logout' => [
+                    'logout_path' => '/dashboard/logout',
+                    'invalidate_session' => true
+                ],
+                'users' => function() use ($app) {
+                    return new UserProvider($app['db']);
+                }
+            ],
         ],
     ])
     ->register(new Silex\Provider\MonologServiceProvider(), [
@@ -120,9 +137,6 @@ $app
 
 $app
     ->get('/root', function () use ($app) {
-//        echo "<pre>";
-//        var_dump($app['security.authorization_checker']->isGranted('ROLE_ROOT'));
-//        echo "</pre>";
         $sql = "SELECT * FROM `users` WHERE role = 'ROLE_ADMIN'";
         $admins = $app['db']->fetchAll($sql);
         return $app['twig']->render('root.twig', [
@@ -132,18 +146,73 @@ $app
     ->bind('root');
 
 $app
-    ->get('/add_admin', function () use ($app) {
-        var_dump($_POST);
+    ->post('/add_admin', function (Request $request) use ($app) {
+
+        $status[] = '';
+        $login = trim($request->get('login'));
+        $email = trim($request->get('email'));
+        $password = password_hash($request->get('password'), PASSWORD_BCRYPT);
+        $role = trim($request->get('role'));
+
+        $findUsername = "SELECT username FROM users WHERE username = '$login'";
+        $findEmail = "SELECT email FROM users WHERE email = '$email'";
+        $username = $app['db']->fetchAll($findUsername);
+        $emailData = $app['db']->fetchAll($findEmail);
+
+        if (!empty($username) or !empty($emailData)) {
+            $status = [
+                'type' => 'warning',
+                'message' => 'Пользователь с данными ' . $login . '/' . $email . ' существует',
+            ];
+        } else {
+            try {
+                $app['db']->insert('users', [
+                    'username' => $login,
+                    'email' => $email,
+                    'password' => $password,
+                    'created' => date('Y-m-d'),
+                    'role' => 'ROLE_' . $role,
+                ]);
+                $status = [
+                    'type' => 'success',
+                    'message' => 'Пользователь ' . $login . ' успешно создан',
+                ];
+            } catch (\Exception $e) {
+                $status = [
+                    'type' => 'danger',
+                    'message' => $e->getMessage(),
+                ];
+            }
+        }
+        return new JsonResponse($status);
     })
     ->bind('add_admin');
 
 $app
     ->get('/login', function (Request $request) use ($app) {
         return $app['twig']->render('login.twig', [
-            'error'         => $app['security.last_error']($request),
+            'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
         ]);
     })
     ->bind('login');
+
+$app
+    ->get('/admin', function (Request $request) use($app){
+        return $app['twig']->render('admin.twig', [
+            'error' => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+        ]);
+    })
+    ->bind('admin');
+
+$app
+    ->get('/dashboard', function () use ($app) {
+//        $sql = "SELECT * FROM `users` WHERE role = 'ROLE_ADMIN'";
+//        $admins = $app['db']->fetchAll($sql);
+        return $app['twig']->render('dashboard.twig', [
+        ]);
+    })
+    ->bind('dashboard');
 
 $app->run();
