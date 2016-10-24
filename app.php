@@ -141,6 +141,7 @@ $app
         $admins = $app['db']->fetchAll($sql);
         return $app['twig']->render('root.twig', [
             'admins' => $admins,
+            'title' => 'Войти как root'
         ]);
     })
     ->bind('root');
@@ -202,15 +203,19 @@ $app
         return $app['twig']->render('admin.twig', [
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
+            'title' => 'Войти как администратор',
         ]);
     })
     ->bind('admin');
 
 $app
     ->get('/dashboard', function () use ($app) {
-//        $sql = "SELECT * FROM `users` WHERE role = 'ROLE_ADMIN'";
-//        $admins = $app['db']->fetchAll($sql);
+        $tourQuery = "SELECT * from tours";
+        $tours = $app['db']->fetchAll($tourQuery);
         return $app['twig']->render('dashboard.twig', [
+            'title' => 'Админинстрирование сайта',
+            'logo' => 'Управление сайтом',
+            'tours' => $tours,
         ]);
     })
     ->bind('dashboard');

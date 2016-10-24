@@ -1,1 +1,152 @@
-dashboard
+{% extends 'base.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block header %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('dashboard') }}">
+                    <span class="fa fa-dashboard"></span>
+                    {{ logo }}
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ path('home') }}" target="_blank">
+                            <span class="fa fa-home"></span>&nbsp;На сайт
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('dashboard_logout') }}">
+                            <span class="fa fa-sign-out"></span>&nbsp;Выход
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3"> <!-- required for floating -->
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tabs-left">
+                        <li class="active"><a href="#tour" data-toggle="tab">Афиша</a></li>
+                        <li><a href="#band" data-toggle="tab">Группа</a></li>
+                        <li><a href="#photo" data-toggle="tab">Фото</a></li>
+                        <li><a href="#contacts" data-toggle="tab">Контакты</a></li>
+                        <li><a href="#rider" data-toggle="tab">Райдер</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tour">
+                            {% if tours == null %}
+                                <div class="alert alert-warning">
+                                    <strong>Внимание!</strong> Нет добавленных концертов
+                                </div>
+                            {% else %}
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Дата</th>
+                                        <th>Город</th>
+                                        <th>Место</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for tour in tours %}
+                                        <tr>
+                                            <td>{{ tour.date }}</td>
+                                            <td>{{ tour.city }}</td>
+                                            <td>{{ tour.location }}</td>
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-success"
+                                                        data-toggle="tooltip" title="Редактировать">
+                                                    <span class="fa fa-edit"></span>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-danger"
+                                                        data-toggle="tooltip" title="Удалить">
+                                                    <span class="fa fa-trash"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#addTour">
+                                <span class="fa fa-plus"></span>&nbsp;Добавить
+                            </button>
+                        </div>
+                        <div class="tab-pane" id="band">Profile Tab.</div>
+                        <div class="tab-pane" id="photo">Messages Tab.</div>
+                        <div class="tab-pane" id="contacts">Settings Tab.</div>
+                        <div class="tab-pane" id="rider">Settings Tab.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ADD TOUR-->
+    <div id="addTour" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Добавить новый концерт в афишу</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class='input-group date' id='datepicker'>
+                                <input type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <script src="{{ asset('/web/js/dashboard.js') }}"></script>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

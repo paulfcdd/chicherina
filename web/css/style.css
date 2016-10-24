@@ -14,6 +14,10 @@ html,
 body {
   height: 100%;
 }
+html .modal-content,
+body .modal-content {
+  border-radius: 0;
+}
 html .wrapper,
 body .wrapper {
   display: flex;
@@ -201,6 +205,10 @@ body .wrapper .root {
 html .wrapper .root .modal-content,
 body .wrapper .root .modal-content {
   border-radius: 0;
+}
+html .wrapper .dashboard,
+body .wrapper .dashboard {
+  flex: 1 0 auto;
 }
 html .wrapper .footer,
 body .wrapper .footer {
