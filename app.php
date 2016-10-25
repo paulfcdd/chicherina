@@ -2,9 +2,9 @@
 include_once __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . '/app/services/UserProvider.php';
 
+use Services\UserProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Services\UserProvider;
 
 $app = new Silex\Application();
 $app['debug'] = true;
@@ -68,7 +68,7 @@ $app
                     'logout_path' => '/dashboard/logout',
                     'invalidate_session' => true
                 ],
-                'users' => function() use ($app) {
+                'users' => function () use ($app) {
                     return new UserProvider($app['db']);
                 }
             ],
@@ -194,12 +194,13 @@ $app
         return $app['twig']->render('login.twig', [
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
+            'title' => 'Войти как Root'
         ]);
     })
     ->bind('login');
 
 $app
-    ->get('/admin', function (Request $request) use($app){
+    ->get('/admin', function (Request $request) use ($app) {
         return $app['twig']->render('admin.twig', [
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
@@ -219,5 +220,23 @@ $app
         ]);
     })
     ->bind('dashboard');
+
+$app
+    ->post('/delete_admin', function () use ($app) {
+        $id = $_POST['admin_id'];
+        try {
+            $app['db']->delete('users', ['id' => $id]);
+            return $app->redirect($app["url_generator"]->generate("root"));
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    })
+    ->bind('delete_admin');
+
+$app
+    ->post('/edit_admin', function() use($app) {
+        return new \Symfony\Component\HttpFoundation\Response('kek');
+    })
+    ->bind('edit_admin');
 
 $app->run();
