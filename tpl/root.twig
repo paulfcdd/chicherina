@@ -63,26 +63,53 @@
                             </tr>
                             </thead>
                             <tbody>
-                           {% for admin in admins %}
-                               <tr>
-                                   <td>{{ admin.username }}</td>
-                                   <td>{{ admin.email }}</td>
-                                   <td>{{ admin.created }}</td>
-                                   <td>
-                                       <button type="button"
-                                               class="btn btn-success"
-                                               data-toggle="tooltip" title="Редактировать">
-                                           <span class="fa fa-edit"></span>
-                                       </button>
-                                   </td>
-                                   <td>
-                                       <button type="button"
-                                               class="btn btn-danger"
-                                               data-toggle="tooltip" title="Удалить">
-                                           <span class="fa fa-trash"></span>
-                                       </button>
-                                   </td>
-                               </tr>
+                            {% for admin in admins %}
+                                <tr>
+                                    <td>{{ admin.username }}</td>
+                                    <td>{{ admin.email }}</td>
+                                    <td>{{ admin.created }}</td>
+                                    <td>
+                                        <button type="button"
+                                                class="btn btn-success"
+                                                data-target="#{{ admin.id }}"
+                                                data-toggle="modal"
+                                                data-tooltip="tooltip"
+                                                title="Редактировать">
+                                            <span class="fa fa-edit"></span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <form action="{{ path('delete_admin') }}" method="post">
+                                            <button type="submit"
+                                                    class="btn btn-danger"
+                                                    name="admin_id"
+                                                    value="{{ admin.id }}"
+                                                    data-tooltip="tooltip"
+                                                    title="Удалить">
+                                                <span class="fa fa-trash"></span>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <div id="{{ admin.id }}" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">{{ admin.username }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Some text in the modal.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             {% endfor %}
                             </tbody>
                         </table>
