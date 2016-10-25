@@ -1,6 +1,14 @@
 'use strict';
 
 $(function () {
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: 'ru'
+    });
+});
+
+
+$(function () {
     $('#datetimepicker2').datetimepicker({
         format: 'YYYY-MM-DD',
         locale: 'ru'
