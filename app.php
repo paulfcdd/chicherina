@@ -240,7 +240,7 @@ $app
 $app
     ->post('/delete_tour', function () use ($app) {
         $id = $_POST['tour_id'];
-        
+
         try {
             $app['db']->delete('tours', ['id' => $id]);
             return $app->redirect($app["url_generator"]->generate("dashboard"));
@@ -251,13 +251,13 @@ $app
     ->bind('delete_tour');
 
 $app
-    ->post('/edit_admin', function() use($app) {
+    ->post('/edit_admin', function () use ($app) {
         return new \Symfony\Component\HttpFoundation\Response('kek');
     })
     ->bind('edit_admin');
 
 $app
-    ->post('/add_tour', function(Request $request) use($app) {
+    ->post('/add_tour', function (Request $request) use ($app) {
         $status[] = '';
         $date = trim($request->get('date'));
         $city = trim($request->get('city'));
@@ -266,15 +266,15 @@ $app
         try {
             $app['db']->insert(
                 'tours', [
-                    'date' => $date,
-                    'city' => $city,
-                    'location' => $place,
-                ]);
+                'date' => $date,
+                'city' => $city,
+                'location' => $place,
+            ]);
             $status = [
                 'type' => 'success',
                 'message' => 'Концерт успешно добавлен',
             ];
-           return new JsonResponse($status);
+            return new JsonResponse($status);
 
         } catch (\Exception $e) {
             $status = [
@@ -287,7 +287,7 @@ $app
     ->bind('add_tour');
 
 $app
-    ->post('/edit_tour', function (Request $request) use($app) {
+    ->post('/edit_tour', function (Request $request) use ($app) {
         $status[] = '';
         $id = trim($request->get('id'));
         $date = trim($request->get('date'));
@@ -318,5 +318,107 @@ $app
         }
     })
     ->bind('edit_tour');
+
+$app
+    ->post('/add_album', function (Request $request) use ($app) {
+        $status[] = '';
+        $name = trim($request->get('name'));
+
+        try {
+            $app['db']->insert(
+                'albums', [
+                'name' => $name,
+                'date' => date('Y-m-d'),
+            ]);
+            $status = [
+                'type' => 'success',
+                'message' => 'Альбом успешно добавлен',
+            ];
+            return new JsonResponse($status);
+
+        } catch (\Exception $e) {
+            $status = [
+                'type' => 'success',
+                'message' => $e->getMessage(),
+            ];
+            return new JsonResponse($status);
+        }
+    })
+    ->bind('add_album');
+
+$app
+    ->get('/dashboard/album/{id}', function ($id) use ($app) {
+        $photosQuery = "SELECT * from photos WHERE album_id = '$id'";
+        $photos = $app['db']->fetchAll($photosQuery);
+        $albumNameQuery = "SELECT * FROM albums WHERE id='$id'";
+        $albumData = $app['db']->fetchAssoc($albumNameQuery);
+
+
+        return $app['twig']->render('dashboard/photos/album.twig', [
+            'id' => $id,
+            'logo' => 'Вернуться на главную',
+            'photos' => $photos,
+            'albumName' => $albumData['name']
+        ]);
+    })
+    ->bind('album');
+
+
+function uploadFiles(array $files, int $max_file_size, array $valid_formats, string $path) {
+
+    $message = null;
+
+    foreach ($files['photos']['name'] as $f => $name) {
+        if ($files['photos']['error'][$f] == 4) {
+            continue; // Skip file if any error found
+        }
+        if ($files['photos']['error'][$f] == 0) {
+            if ($files['photos']['size'][$f] > $max_file_size) {
+                $message = "$name is too large!.";
+                continue; // Skip large files
+            } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+                $message = "$name is not a valid format";
+                continue; // Skip invalid file formats
+            } else { // No error found! Move uploaded files
+                if (move_uploaded_file($files["photos"]["tmp_name"][$f], __DIR__ . $path . $name))
+               $message[] = $path . $name;
+            }
+        }
+    }
+
+    return $message;
+}
+
+$app
+    ->post('/upload_photo', function () use ($app) {
+        $albumId = $_POST['albumId'];
+        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
+        $max_file_size = 1024 * 100; //100 kb
+        $path = '/web/media/photos/';
+
+        $file_upload = uploadFiles($_FILES, $max_file_size,$valid_formats, $path);
+
+        var_dump($file_upload);
+
+        if (is_array($file_upload)) {
+
+
+            try {
+                for ($i = 0; $i < count($file_upload); $i++) {
+                    $app['db']->insert(
+                        'photos', [
+                            'album_id' => $albumId,
+                            'name' => $file_upload[$i],
+                            'date' => date('Y-m-d'),
+                        ]
+                    );
+                }
+                return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }
+    })
+    ->bind('upload_photo');
 
 $app->run();

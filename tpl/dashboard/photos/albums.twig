@@ -2,4 +2,37 @@
     <div class="alert alert-warning">
         <strong>Внимание!</strong> Нет добавленных альбомов
     </div>
+{% else %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Название альбома</th>
+            <th>Дата создания</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for album in albums %}
+            <tr>
+                <td>
+                    <a href="{{ path('album', {'id': album.id}) }}">
+                        {{ album.name }}
+                    </a>
+                </td>
+                <td>{{ album.date }}</td>
+                <td>
+                    <form method="post">
+                        <button type="submit"
+                                class="btn btn-danger"
+                                name="album_id"
+                                value="{{ album.id }}"
+                                data-tooltip="tooltip" title="Удалить">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endif %}

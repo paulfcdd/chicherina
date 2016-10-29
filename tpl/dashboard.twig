@@ -48,11 +48,31 @@
                 <div class="col-xs-3"> <!-- required for floating -->
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs tabs-left">
-                        <li class="active"><a href="#tour" data-toggle="tab">Афиша</a></li>
-                        <li><a href="#band" data-toggle="tab">Группа</a></li>
-                        <li><a href="#photo" data-toggle="tab">Фото</a></li>
-                        <li><a href="#contacts" data-toggle="tab">Контакты</a></li>
-                        <li><a href="#rider" data-toggle="tab">Райдер</a></li>
+                        <li class="active">
+                            <a href="#tour" data-toggle="tab">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Афиша
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#band" data-toggle="tab">
+                                <i class="fa fa-music" aria-hidden="true"></i>&nbsp;Группа
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#photo" data-toggle="tab">
+                                <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;Фото
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contacts" data-toggle="tab">
+                                <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Контакты
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#rider" data-toggle="tab">
+                                <i class="fa fa-list" aria-hidden="true"></i>&nbsp;Райдер
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -93,8 +113,9 @@
         </div>
     </div>
 
-    <!--ADD TOUR-->
+    <!--MODALS-->
     {% include 'dashboard/tour/modals/add_tour.twig' %}
+    {% include 'dashboard/photos/modals/add_album.twig' %}
 
 {% endblock %}
 

@@ -63,3 +63,21 @@ function editTour(form) {
         }
     });
 }
+
+function addAlbum(form) {
+    var name = $(form).find("input[id=albumName]").val();
+    var path = $(form).find("input[id=path]").val();
+
+    $.ajax({
+        url: path,
+        method: 'post',
+        data: {
+            name: name
+        },
+        success: function (data) {
+            $(".info-message").toggleClass('alert-' + data.type);
+            $(".info-message").text(data.message);
+            $(".info-message").show();
+        }
+    });
+}

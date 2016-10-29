@@ -27,6 +27,24 @@ body .wrapper {
   margin: 0 auto;
   font: 14px/20px Arial, sans-serif;
 }
+html .wrapper .fileinput-button,
+body .wrapper .fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+html .wrapper .fileinput-button input,
+body .wrapper .fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
 html .wrapper .text,
 body .wrapper .text {
   padding: 15px 15px 0 !important;
