@@ -402,21 +402,16 @@ $app
 
         if (is_array($file_upload)) {
 
-
-            try {
-                for ($i = 0; $i < count($file_upload); $i++) {
-                    $app['db']->insert(
-                        'photos', [
-                            'album_id' => $albumId,
-                            'name' => $file_upload[$i],
-                            'date' => date('Y-m-d'),
-                        ]
-                    );
-                }
-                return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
-            } catch (\Exception $e) {
-                return $e->getMessage();
+            for ($i = 0; $i < count($file_upload); $i++) {
+                $app['db']->insert(
+                    'photos', [
+                        'album_id' => $albumId,
+                        'name' => $file_upload[$i],
+                        'date' => date('Y-m-d'),
+                    ]
+                );
             }
+            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
         }
     })
     ->bind('upload_photo');

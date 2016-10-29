@@ -39,7 +39,6 @@
                     </blockquote>
                 </div>
                 <div class="col-lg-12">
-                    {#<img id="blah" src="#" alt="your image" />#}
                     <form action="{{ path('upload_photo') }}" method="post" enctype="multipart/form-data">
                         <span class="btn btn-success fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
@@ -47,8 +46,14 @@
                             <input type="file" name="photos[]" multiple="multiple" id="photos">
                         </span>
                         <input type="text" value="{{ id }}" name="albumId" hidden>
-                        <button type="submit" class="btn btn-success">Upload</button>
+                        <button type="submit" class="btn btn-warning">Upload</button>
                     </form>
+                    {#<img id="blah" src="#" alt="your image" />#}
+                    <table class="table table-condensed preview">
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
