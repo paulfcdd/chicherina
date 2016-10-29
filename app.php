@@ -212,11 +212,15 @@ $app
 $app
     ->get('/dashboard', function () use ($app) {
         $tourQuery = "SELECT * from tours";
+        $albumsQuery = "SELECT * FROM albums";
+
         $tours = $app['db']->fetchAll($tourQuery);
+        $albums = $app['db']->fetchAll($albumsQuery);
         return $app['twig']->render('dashboard.twig', [
             'title' => 'Админинстрирование сайта',
             'logo' => 'Управление сайтом',
             'tours' => $tours,
+            'albums' => $albums,
         ]);
     })
     ->bind('dashboard');

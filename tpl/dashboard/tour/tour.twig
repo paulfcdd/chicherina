@@ -1,0 +1,52 @@
+{% if tours == null %}
+    <div class="alert alert-warning">
+        <strong>Внимание!</strong> Нет добавленных концертов
+    </div>
+{% else %}
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Город</th>
+            <th>Место</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tour in tours %}
+            <tr>
+                <td>{{ tour.date }}</td>
+                <td>{{ tour.city }}</td>
+                <td>{{ tour.location }}</td>
+                <td>
+                    <button type="button"
+                            class="btn btn-success"
+                            data-toggle="modal"
+                            data-target="#{{ tour.id }}"
+                            data-tooltip="tooltip" title="Редактировать">
+                        <span class="fa fa-edit"></span>
+                    </button>
+                    {% include 'dashboard/tour/modals/edit_tour.twig' with {
+                    'id': tour.id,
+                    'date': tour.date,
+                    'city': tour.city,
+                    'location': tour.location
+                    } %}
+                </td>
+                <td>
+                    <form action="{{ path('delete_tour') }}" method="post">
+                        <button type="submit"
+                                class="btn btn-danger"
+                                name="tour_id"
+                                value="{{ tour.id }}"
+                                data-tooltip="tooltip" title="Удалить">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

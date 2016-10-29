@@ -62,7 +62,7 @@
 
                         <div class="tab-pane active" id="tour">
 
-                            {% include 'dashboard/tour_tpls/tour.twig' with {'tours':tours} %}
+                            {% include 'dashboard/tour/tour.twig' with {'tours':tours} %}
 
                             <button type="button" class="btn btn-info" data-toggle="modal"
                                     data-target="#addTour">
@@ -73,7 +73,16 @@
 
                         <div class="tab-pane" id="band">Profile Tab.</div>
 
-                        <div class="tab-pane" id="photo">Messages Tab.</div>
+                        <div class="tab-pane" id="photo">
+
+                            {% include 'dashboard/photos/albums.twig' with {'albums':albums} %}
+
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#addAlbum">
+                                <span class="fa fa-plus"></span>&nbsp;Добавить
+                            </button>
+
+                        </div>
 
                         <div class="tab-pane" id="contacts">Settings Tab.</div>
 
@@ -85,7 +94,7 @@
     </div>
 
     <!--ADD TOUR-->
-    {% include 'dashboard/tour_tpls/add_tour.twig' %}
+    {% include 'dashboard/tour/modals/add_tour.twig' %}
 
 {% endblock %}
 
