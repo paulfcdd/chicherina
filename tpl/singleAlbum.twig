@@ -9,12 +9,15 @@
         <div class="container">
             <div class="row">
                 {% for photo in photos %}
-                    <div class="col-lg-2">
-                        <div class="thumbnail gallery">
-                            <a href="#" data-toggle="modal" data-target="#{{ photo.id }}" class="thumbnail">
-                                <img src="{{ asset(photo.name) }}">
-                            </a>
-                        </div>
+                    <div class="col-lg-3" style="border: 1px solid black">
+                        <a href="#" class="thumbnail">
+                            <img src="{{ asset(photo.name) }}" >
+                        </a>
+                        {#<div class="thumbnail gallery">#}
+                            {#<a href="#" data-toggle="modal" data-target="#{{ photo.id }}" class="thumbnail">#}
+                                {#<img src="{{ asset(photo.name) }}">#}
+                            {#</a>#}
+                        {#</div>#}
                     </div>
                     <div class="modal fade" role="dialog" id="{{ photo.id }}">
                         <div class="modal-dialog">

@@ -3,15 +3,14 @@
 {% block content %}
     <div class="photos">
         <div class="container">
-            {{ dump(albums) }}
             <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-group">
                 {% for album in albums %}
-                    <div class="col-lg-2">
-                        <a href="{{ path('single_album', {'id': album.id}) }}" class="thumbnail">
-                            <p>{{ album.name }}</p>
-                        </a>
-                    </div>
+                    <a href="{{ path('single_album', {'id': album.id}) }}" class="list-group-item">{{ album.name }}<span class="badge">0</span></a>
                 {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
