@@ -113,11 +113,26 @@ $app
 
 $app
     ->get('/photos', function () use ($app) {
-        return $app['twig']->render('photos.twig', [
+        $getAlbumsQuery = "SELECT * FROM albums";
+        $albums = $app['db']->fetchAll($getAlbumsQuery);
 
+        return $app['twig']->render('photos.twig', [
+            'albums' => $albums,
         ]);
     })
     ->bind('photos');
+
+$app
+    ->get('/photos/album/{id}', function ($id) use($app) {
+        $album = $app['db']->fetchAssoc("SELECT * FROM albums WHERE id = '$id'");
+        $photos = $app['db']->fetchAll("SELECT * FROM photos WHERE album_id='$id'");
+        return $app['twig']->render('singleAlbum.twig', [
+            'title' => $album['name'],
+            'id' => $id,
+            'photos' => $photos,
+        ]);
+    })
+    ->bind('single_album');
 
 $app
     ->get('/contacts', function () use ($app) {
@@ -415,5 +430,18 @@ $app
         }
     })
     ->bind('upload_photo');
+
+$app
+    ->post('/delete_photo', function () use($app) {
+        $id = $_POST['deletePhoto'];
+        $albumId = $_POST['albumId'];
+        try {
+            $app['db']->delete('photos', ['id' => $id]);
+            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    })
+    ->bind('delete_photo');
 
 $app->run();

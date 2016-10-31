@@ -18,6 +18,21 @@ html .modal-content,
 body .modal-content {
   border-radius: 0;
 }
+html .gallery,
+body .gallery {
+  border: 1px solid darkgrey;
+  border-radius: 0;
+  min-height: 170px;
+}
+html .gallery .photo-caption,
+body .gallery .photo-caption {
+  min-height: 120px;
+  border: none;
+}
+html .gallery .caption,
+body .gallery .caption {
+  padding: 0;
+}
 html .wrapper,
 body .wrapper {
   display: flex;

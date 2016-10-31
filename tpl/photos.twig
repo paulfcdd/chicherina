@@ -3,9 +3,16 @@
 {% block content %}
     <div class="photos">
         <div class="container">
-            <p>
-                photo
-            </p>
+            {{ dump(albums) }}
+            <div class="row">
+                {% for album in albums %}
+                    <div class="col-lg-2">
+                        <a href="{{ path('single_album', {'id': album.id}) }}" class="thumbnail">
+                            <p>{{ album.name }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

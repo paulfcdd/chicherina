@@ -35,18 +35,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <blockquote>
-                        <p>В альбом {{ albumName }} добавлено {{ photos | length  }} фотографий</p>
+                        <p>В альбом {{ albumName }} добавлено {{ photos | length }} фотографий</p>
                     </blockquote>
                 </div>
                 <div class="col-lg-12">
                     <form action="{{ path('upload_photo') }}" method="post" enctype="multipart/form-data">
                         <span class="btn btn-success fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
-                            <span>Add files...</span>
+                            <span>Выбрать фото</span>
                             <input type="file" name="photos[]" multiple="multiple" id="photos">
                         </span>
                         <input type="text" value="{{ id }}" name="albumId" hidden>
-                        <button type="submit" class="btn btn-warning">Upload</button>
+                        <button type="submit" class="btn btn-warning">
+                            <span class="fa fa-upload"></span>&nbsp;Загрузить
+                        </button>
                     </form>
                     {#<img id="blah" src="#" alt="your image" />#}
                     <table class="table table-condensed preview">
@@ -55,6 +57,32 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="row">
+                {% for photo in photos %}
+                    <div class="col-lg-2 col-xs-12">
+                        <div class="thumbnail gallery">
+                            <div class="thumbnail photo-caption">
+                                <img src="{{ asset(photo.name) }}">
+                            </div>
+                            <div class="caption">
+                                <div class="row">
+                                    <div class="col-lg-4 text-center"></div>
+                                    <div class="col-lg-4 text-center"></div>
+                                    <div class="col-lg-4 text-center">
+                                        <form method="post" action="{{ path('delete_photo') }}">
+                                            <input name="albumId" value="{{ id }}" hidden>
+                                            <button class="btn btn-danger"
+                                                    name="deletePhoto" type="submit" value="{{ photo.id }}">
+                                                <span class="fa fa-trash"></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
