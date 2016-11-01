@@ -21,6 +21,20 @@ body {
     border-radius: 0;
   }
 
+  .gallery {
+    border: 1px solid darkgrey;
+    border-radius: 0;
+    min-height: 170px;
+
+    .photo-caption {
+      min-height: 120px;
+      border: none;
+    }
+    .caption {
+      padding: 0;
+    }
+  }
+
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -28,6 +42,23 @@ body {
     height: 100%;
     margin: 0 auto;
     font: 14px/20px Arial, sans-serif;
+
+    .fileinput-button {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .fileinput-button input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      font-size: 200px !important;
+      direction: ltr;
+      cursor: pointer;
+    }
 
     .text {
       padding: 15px 15px 0 !important;
@@ -92,6 +123,7 @@ body {
       flex: 1 0 auto;
       margin-top: 60px;
     }
+
     .band {
       flex: 1 0 auto;
       margin-top: 60px;

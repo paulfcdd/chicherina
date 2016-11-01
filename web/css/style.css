@@ -18,6 +18,21 @@ html .modal-content,
 body .modal-content {
   border-radius: 0;
 }
+html .gallery,
+body .gallery {
+  border: 1px solid darkgrey;
+  border-radius: 0;
+  min-height: 170px;
+}
+html .gallery .photo-caption,
+body .gallery .photo-caption {
+  min-height: 120px;
+  border: none;
+}
+html .gallery .caption,
+body .gallery .caption {
+  padding: 0;
+}
 html .wrapper,
 body .wrapper {
   display: flex;
@@ -26,6 +41,24 @@ body .wrapper {
   height: 100%;
   margin: 0 auto;
   font: 14px/20px Arial, sans-serif;
+}
+html .wrapper .fileinput-button,
+body .wrapper .fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+html .wrapper .fileinput-button input,
+body .wrapper .fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
 }
 html .wrapper .text,
 body .wrapper .text {

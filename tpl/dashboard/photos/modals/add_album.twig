@@ -1,0 +1,32 @@
+<div id="addAlbum" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Добавить новый альбом</h4>
+            </div>
+            <div class="info-message alert" hidden></div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="albumName">Название</label>
+                        <input type="text" name="album_name" id="albumName" class="form-control">
+                    </div>
+                    <input type="text" id="path" value="{{ path('add_album') }}" hidden>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="fa fa-close"></span>&nbsp;Отменить
+                    </button>
+                    <button type="button" class="btn btn-success"
+                            onclick="addAlbum(this.form)">
+                        <span class="fa fa-plus"></span>&nbsp;Добавить
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

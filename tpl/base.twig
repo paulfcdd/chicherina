@@ -11,6 +11,8 @@
     <link href="{{ asset('/web/css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/web/fonts/fa/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('/web/css/vertical_tabs/bootstrap.vertical-tabs.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('/web/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}"/>
 </head>
 <body>
 <div class="wrapper">
@@ -70,9 +72,15 @@
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <script src="{{ asset('/web/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/web/bower_components/moment/min/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/web/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('[data-tooltip="tooltip"]').tooltip();
     });
 </script>
+<script src="{{ asset('/web/bower_components/moment/locale/ru.js') }}"></script>
+<script src="{{ asset('/web/js/dashboard.js') }}"></script>
+<script src="{{ asset('/web/js/photos.js') }}"></script>
 </html>
