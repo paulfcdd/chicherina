@@ -86,7 +86,7 @@ $app->boot();
 $app
     ->get('/', function () use ($app) {
         return $app['twig']->render('index.twig', [
-            'title' => 'Чичерина',
+            'title' => 'Чичерина. Главная',
         ]);
     })
     ->bind('home');
@@ -97,6 +97,7 @@ $app
         $tours = $app['db']->fetchAll($sql);
         return $app['twig']->render('tour.twig', [
             'tours' => $tours,
+            'title' => 'Афиша',
         ]);
     })
     ->bind('tour');
@@ -107,6 +108,7 @@ $app
         $band = $app['db']->fetchAll($sql);
         return $app['twig']->render('band.twig', [
             'band' => $band,
+            'title' => 'Группа',
         ]);
     })
     ->bind('band');
@@ -118,9 +120,26 @@ $app
 
         return $app['twig']->render('photos.twig', [
             'albums' => $albums,
+            'title' => 'Фото',
         ]);
     })
     ->bind('photos');
+
+$app
+    ->get('/rider', function () use ($app) {
+        return $app['twig']->render('rider.twig', [
+            'title' => 'Райдер',
+        ]);
+    })
+    ->bind('rider');
+
+$app
+    ->get('/contacts', function () use ($app) {
+        return $app['twig']->render('contacts.twig', [
+            'title' => 'Контакты',
+        ]);
+    })
+    ->bind('contacts');
 
 $app
     ->get('/photos/album/{id}', function ($id) use($app) {
@@ -133,22 +152,6 @@ $app
         ]);
     })
     ->bind('single_album');
-
-$app
-    ->get('/contacts', function () use ($app) {
-        return $app['twig']->render('contacts.twig', [
-
-        ]);
-    })
-    ->bind('contacts');
-
-$app
-    ->get('/rider', function () use ($app) {
-        return $app['twig']->render('rider.twig', [
-
-        ]);
-    })
-    ->bind('rider');
 
 $app
     ->get('/root', function () use ($app) {
@@ -408,7 +411,7 @@ $app
     ->post('/upload_photo', function () use ($app) {
         $albumId = $_POST['albumId'];
         $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
-        $max_file_size = 1024 * 100; //100 kb
+        $max_file_size = 1024 * 1000; //100 kb
         $path = '/web/media/photos/';
 
         $file_upload = uploadFiles($_FILES, $max_file_size,$valid_formats, $path);
