@@ -92,7 +92,7 @@ $app
     ->bind('home');
 
 $app
-    ->get('/tour', function () use ($app) {
+    ->get('/афиша', function () use ($app) {
         $sql = 'SELECT * FROM tours';
         $tours = $app['db']->fetchAll($sql);
         return $app['twig']->render('tour.twig', [
@@ -103,7 +103,7 @@ $app
     ->bind('tour');
 
 $app
-    ->get('/band', function () use ($app) {
+    ->get('/группа', function () use ($app) {
         $sql = 'SELECT * FROM band';
         $band = $app['db']->fetchAll($sql);
         return $app['twig']->render('band.twig', [
@@ -114,7 +114,7 @@ $app
     ->bind('band');
 
 $app
-    ->get('/photos', function () use ($app) {
+    ->get('/фото', function () use ($app) {
         $getAlbumsQuery = "SELECT * FROM albums";
         $albums = $app['db']->fetchAll($getAlbumsQuery);
 
@@ -126,7 +126,7 @@ $app
     ->bind('photos');
 
 $app
-    ->get('/rider', function () use ($app) {
+    ->get('/райдер', function () use ($app) {
         return $app['twig']->render('rider.twig', [
             'title' => 'Райдер',
         ]);
@@ -134,7 +134,7 @@ $app
     ->bind('rider');
 
 $app
-    ->get('/contacts', function () use ($app) {
+    ->get('/контакты', function () use ($app) {
         return $app['twig']->render('contacts.twig', [
             'title' => 'Контакты',
         ]);
@@ -142,7 +142,7 @@ $app
     ->bind('contacts');
 
 $app
-    ->get('/photos/album/{id}', function ($id) use($app) {
+    ->get('/фото/альбом/{id}', function ($id) use($app) {
         $album = $app['db']->fetchAssoc("SELECT * FROM albums WHERE id = '$id'");
         $photos = $app['db']->fetchAll("SELECT * FROM photos WHERE album_id='$id'");
         return $app['twig']->render('singleAlbum.twig', [
@@ -409,15 +409,14 @@ function uploadFiles(array $files, int $max_file_size, array $valid_formats, str
 
 $app
     ->post('/upload_photo', function () use ($app) {
+
         $albumId = $_POST['albumId'];
-        $valid_formats = array("jpg", "png", "gif", "zip", "bmp");
-        $max_file_size = 1024 * 1000; //100 kb
-        $path = '/web/media/photos/';
+        $valid_formats = $app['config']['file.upload']['valid_formats'];
+        $max_file_size = intval($app['config']['file.upload']['max_file_size']);
+        $path = $app['config']['file.upload']['path'];
 
         $file_upload = uploadFiles($_FILES, $max_file_size,$valid_formats, $path);
-
-        var_dump($file_upload);
-
+        
         if (is_array($file_upload)) {
 
             for ($i = 0; $i < count($file_upload); $i++) {
@@ -430,6 +429,8 @@ $app
                 );
             }
             return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
+        } else {
+            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId, 'error' => $file_upload]));
         }
     })
     ->bind('upload_photo');
@@ -438,8 +439,10 @@ $app
     ->post('/delete_photo', function () use($app) {
         $id = $_POST['deletePhoto'];
         $albumId = $_POST['albumId'];
+        $file = $app['db']->fetchAssoc("SELECT name FROM photos WHERE id = '$id'");
         try {
             $app['db']->delete('photos', ['id' => $id]);
+            unlink(__DIR__ . $file['name']);
             return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
