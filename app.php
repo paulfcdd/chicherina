@@ -450,4 +450,27 @@ $app
     })
     ->bind('delete_photo');
 
+$app
+    ->post('/delete_album', function (Request $request) use($app) {
+        $albumId = $request->get('id');
+        $status[] = null;
+        $photos = $app['db']->fetchAll("SELECT * FROM photos WHERE album_id = '$albumId'");
+
+        if (!empty($photos)) {
+            $status = [
+                'type' => 'warning',
+                'message' => 'В альбоме есть фотографии',
+            ];
+            return new JsonResponse($status);
+        } else {
+            $app['db']->delete('albums', ['id' => $albumId]);
+            $status = [
+                'type' => 'success',
+                'message' => 'Альбом успешно удален',
+            ];
+            return new JsonResponse($status);
+        }
+    })
+    ->bind('delete_album');
+
 $app->run();
