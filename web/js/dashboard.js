@@ -15,6 +15,22 @@ $(function () {
     });
 });
 
+
+function deleteAlbum(id, path) {
+    $.ajax({
+        method: 'post',
+        url: path,
+        data: {
+            id: id
+        },
+        success: function (data) {
+            $(".info-message").toggleClass('alert-' + data.type);
+            $(".info-message").text(data.message);
+            $(".info-message").show();
+        }
+    });
+}
+
 function addTour(form) {
     var date = $(form).find("input[id=tourDate]").val();
     var city = $(form).find("input[id=tourCity]").val();

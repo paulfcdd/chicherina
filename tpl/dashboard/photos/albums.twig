@@ -25,29 +25,13 @@
                     <button type="submit"
                             class="btn btn-danger"
                             name="album_id"
-                            onclick="deleteAlbum({{ album.id }})"
+                            onclick="deleteAlbum({{ album.id }}, '{{ path('delete_album') }}')"
                             data-tooltip="tooltip" title="Удалить">
                         <span class="fa fa-trash"></span>
                     </button>
                 </td>
             </tr>
         {% endfor %}
-        <script>
-            function deleteAlbum(id) {
-               $.ajax({
-                   method: 'post',
-                   url: '{{ path('delete_album') }}',
-                   data: {
-                      id: id
-                   },
-                   success: function (data) {
-                       $(".info-message").toggleClass('alert-' + data.type);
-                       $(".info-message").text(data.message);
-                       $(".info-message").show();
-                   }
-               });
-            }
-        </script>
         </tbody>
     </table>
 {% endif %}

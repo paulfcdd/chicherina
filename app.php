@@ -229,16 +229,17 @@ $app
 
 $app
     ->get('/dashboard', function () use ($app) {
-        $tourQuery = "SELECT * from tours";
-        $albumsQuery = "SELECT * FROM albums";
 
-        $tours = $app['db']->fetchAll($tourQuery);
-        $albums = $app['db']->fetchAll($albumsQuery);
+        $tours = $app['db']->fetchAll("SELECT * from tours");
+        $albums = $app['db']->fetchAll("SELECT * FROM albums");
+        $rider = $app['db']->fetchAll("SELECT * FROM rider");
+        
         return $app['twig']->render('dashboard.twig', [
             'title' => 'Админинстрирование сайта',
             'logo' => 'Управление сайтом',
             'tours' => $tours,
             'albums' => $albums,
+            'riders' => $rider,
         ]);
     })
     ->bind('dashboard');
