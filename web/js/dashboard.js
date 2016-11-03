@@ -15,7 +15,6 @@ $(function () {
     });
 });
 
-
 function deleteAlbum(id, path) {
     $.ajax({
         method: 'post',
