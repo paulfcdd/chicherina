@@ -7,6 +7,7 @@
         {% block title %}
         {% endblock %}
     </title>
+    <script src="{{ asset('/web/js/jquery-3.1.1.min.js') }}"></script>
     <link href="{{ asset('/web/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/web/css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/web/fonts/fa/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -57,9 +58,18 @@
                 <div class="col-lg-4 col-md-4 hidden-xs hidden-sm"></div>
                 <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 text-center">
                     <ul class="list-unstyled list-inline">
-                        <li><a href="#" class="social" id="fb"><i class="fa fa-facebook fa-2x"></i></a></li>
-                        <li><a href="#" class="social" id="vk"><i class="fa fa-vk fa-2x"></i></a></li>
-                        <li><a href="#" class="social" id="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
+                        <li>
+                            <a href="https://www.facebook.com/uchicherina"
+                               class="social" id="fb" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://vk.com/gruppa_chicherina"
+                               class="social" id="vk" target="_blank"><i class="fa fa-vk fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/user/UChicherina"
+                               class="social" id="youtube" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 hidden-xs hidden-sm"></div>
@@ -68,7 +78,6 @@
     {% endblock %}
 </div>
 </body>
-<script src="{{ asset('/web/js/jquery-3.1.1.min.js') }}"></script>
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <script src="{{ asset('/web/js/bootstrap.min.js') }}"></script>

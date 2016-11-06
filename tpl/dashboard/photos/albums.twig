@@ -3,6 +3,7 @@
         <strong>Внимание!</strong> Нет добавленных альбомов
     </div>
 {% else %}
+    <div class="info-message alert" hidden></div>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -21,15 +22,13 @@
                 </td>
                 <td>{{ album.date }}</td>
                 <td>
-                    <form method="post">
-                        <button type="submit"
-                                class="btn btn-danger"
-                                name="album_id"
-                                value="{{ album.id }}"
-                                data-tooltip="tooltip" title="Удалить">
-                            <span class="fa fa-trash"></span>
-                        </button>
-                    </form>
+                    <button type="submit"
+                            class="btn btn-danger"
+                            name="album_id"
+                            onclick="deleteAlbum({{ album.id }}, '{{ path('delete_album') }}')"
+                            data-tooltip="tooltip" title="Удалить">
+                        <span class="fa fa-trash"></span>
+                    </button>
                 </td>
             </tr>
         {% endfor %}

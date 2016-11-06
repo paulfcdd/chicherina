@@ -54,11 +54,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#band" data-toggle="tab">
-                                <i class="fa fa-music" aria-hidden="true"></i>&nbsp;Группа
-                            </a>
-                        </li>
-                        <li>
                             <a href="#photo" data-toggle="tab">
                                 <i class="fa fa-camera" aria-hidden="true"></i>&nbsp;Фото
                             </a>
@@ -82,7 +77,7 @@
 
                         <div class="tab-pane active" id="tour">
 
-                            {% include 'dashboard/tour/tour.twig' with {'tours':tours} %}
+                            {% include 'dashboard/tour/tour.twig' %}
 
                             <button type="button" class="btn btn-info" data-toggle="modal"
                                     data-target="#addTour">
@@ -91,11 +86,9 @@
 
                         </div>
 
-                        <div class="tab-pane" id="band">Profile Tab.</div>
-
                         <div class="tab-pane" id="photo">
 
-                            {% include 'dashboard/photos/albums.twig' with {'albums':albums} %}
+                            {% include 'dashboard/photos/albums.twig' %}
 
                             <button type="button" class="btn btn-info" data-toggle="modal"
                                     data-target="#addAlbum">
@@ -106,7 +99,9 @@
 
                         <div class="tab-pane" id="contacts">Settings Tab.</div>
 
-                        <div class="tab-pane" id="rider">Settings Tab.</div>
+                        <div class="tab-pane" id="rider">
+                            {% include 'dashboard/rider/rider.twig' %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +111,7 @@
     <!--MODALS-->
     {% include 'dashboard/tour/modals/add_tour.twig' %}
     {% include 'dashboard/photos/modals/add_album.twig' %}
-
+    {% include 'dashboard/rider/modals/add_rider.twig' %}
 {% endblock %}
 
 {% block footer %}

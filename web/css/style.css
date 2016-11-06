@@ -33,6 +33,16 @@ html .gallery .caption,
 body .gallery .caption {
   padding: 0;
 }
+html .image,
+body .image {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 50%;
+}
+html .image img,
+body .image img {
+  position: absolute;
+}
 html .wrapper,
 body .wrapper {
   display: flex;

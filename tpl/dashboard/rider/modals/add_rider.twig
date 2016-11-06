@@ -1,0 +1,29 @@
+<div id="addRider" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Добавить райдер</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ path('upload_photo') }}" method="post" enctype="multipart/form-data">
+                        <span class="btn btn-success fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Выбрать документ</span>
+                            <input type="file" name="photos[]" multiple="multiple" id="photos">
+                        </span>
+                    {#<input type="text" value="{{ id }}" name="albumId" hidden>#}
+                    <button type="submit" class="btn btn-warning">
+                        <span class="fa fa-upload"></span>&nbsp;Загрузить
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

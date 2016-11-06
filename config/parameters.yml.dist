@@ -14,3 +14,10 @@ root.setup:
     role: 'ROLE_ROOT'
     password: 'ctrnjh'
     logout_path: '/root/logout'
+
+file.upload:
+    valid_formats:
+        - jpg
+        - png
+    max_file_size: 10240000 #size in bytes
+    path: /web/media/photos/

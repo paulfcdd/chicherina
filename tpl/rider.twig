@@ -1,11 +1,22 @@
 {% extends 'base.twig' %}
 
+{% block title %}
+    {{ title }}
+{% endblock %}
+
 {% block content %}
-   <div class="rider">
-       <div class="container">
-           <p>
-               райдер
-           </p>
-       </div>
-   </div>
+    <div class="rider">
+        <div class="container">
+            <div class="row">
+                {% for rider in riders %}
+                    <div class="col-lg-3">
+                        <i class="fa fa-file fa-3x"></i>
+                        <a href="{{ rider.path }}">
+                            {{ rider.path | trim('/') | trim('/web')| trim('/media') | trim('rider/') }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,49 @@
+{% if riders == null %}
+    <div class="alert alert-warning">
+        <strong>Внимание!</strong> Нет добавленных райдеров
+    </div>
+{% else %}
+    <div class="info-message alert" hidden></div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Название документа</th>
+            <th>Дата загрузки</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {#{{ dump (riders) }}#}
+        {% for rider in riders %}
+            <tr>
+                <td>
+                    <a href="{{ asset(rider.path) }}" target="_blank">
+                        {{ rider.path | trim('/') | trim('/web')| trim('/media') | trim('rider/') }}
+                    </a>
+                </td>
+                <td>{{ rider.date }}</td>
+                <td>
+                    <button type="submit"
+                            class="btn btn-danger"
+                            name="album_id"
+                            onclick="deleteRider({{ rider.id }}, '{{ path('delete_rider') }}')"
+                            data-tooltip="tooltip" title="Удалить">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<form action="{{ path('add_rider') }}" method="post" enctype="multipart/form-data">
+    <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Выбрать документ</span>
+        <input type="file" name="rider[]" multiple="multiple" id="rider">
+    </span>
+    <button type="submit" class="btn btn-warning">
+        <span class="fa fa-upload"></span>&nbsp;Загрузить
+    </button>
+</form>
