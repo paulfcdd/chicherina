@@ -127,8 +127,11 @@ $app
 
 $app
     ->get('/райдер', function () use ($app) {
+        $rider = $app['db']->fetchAll("SELECT * FROM rider");
+
         return $app['twig']->render('rider.twig', [
             'title' => 'Райдер',
+            'riders' => $rider,
         ]);
     })
     ->bind('rider');
@@ -387,19 +390,19 @@ function uploadFiles(array $files, int $max_file_size, array $valid_formats, str
 
     $message = null;
 
-    foreach ($files['photos']['name'] as $f => $name) {
-        if ($files['photos']['error'][$f] == 4) {
+    foreach ($files['name'] as $f => $name) {
+        if ($files['error'][$f] == 4) {
             continue; // Skip file if any error found
         }
-        if ($files['photos']['error'][$f] == 0) {
-            if ($files['photos']['size'][$f] > $max_file_size) {
+        if ($files['error'][$f] == 0) {
+            if ($files['size'][$f] > $max_file_size) {
                 $message = "$name is too large!.";
                 continue; // Skip large files
             } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
                 $message = "$name is not a valid format";
                 continue; // Skip invalid file formats
             } else { // No error found! Move uploaded files
-                if (move_uploaded_file($files["photos"]["tmp_name"][$f], __DIR__ . $path . $name))
+                if (move_uploaded_file($files["tmp_name"][$f], __DIR__ . $path . $name))
                $message[] = $path . $name;
             }
         }
@@ -416,7 +419,7 @@ $app
         $max_file_size = intval($app['config']['file.upload']['max_file_size']);
         $path = $app['config']['file.upload']['path'];
 
-        $file_upload = uploadFiles($_FILES, $max_file_size,$valid_formats, $path);
+        $file_upload = uploadFiles($_FILES['photos'], $max_file_size,$valid_formats, $path);
         
         if (is_array($file_upload)) {
 
@@ -431,7 +434,7 @@ $app
             }
             return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
         } else {
-            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId, 'error' => $file_upload]));
+            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId, 'error' => 'error']));
         }
     })
     ->bind('upload_photo');
@@ -473,5 +476,55 @@ $app
         }
     })
     ->bind('delete_album');
+
+$app
+    ->post('/add_rider', function () use($app){
+        $valid_formats = ['pdf', 'doc', 'docx'];
+        $max_file_size = 1024000;
+        $path = '/web/media/rider/';
+
+        $file_upload = uploadFiles($_FILES['rider'], $max_file_size,$valid_formats, $path);
+        if (is_array($file_upload)) {
+
+            for ($i = 0; $i < count($file_upload); $i++) {
+                $app['db']->insert(
+                    'rider', [
+                        'path' => $file_upload[$i],
+                        'date' => date('Y-m-d'),
+                    ]
+                );
+            }
+            return $app->redirect($app["url_generator"]->generate("dashboard"));
+        } else {
+            return $app->redirect($app["url_generator"]->generate("dashboard"));
+        }
+    })
+    ->bind('add_rider');
+
+$app
+    ->post('/delete_rider', function (Request $request) use ($app) {
+        $id = $request->get('id');
+        $status[] = null;
+        $file = $app['db']->fetchAssoc("SELECT path FROM rider WHERE id = '$id'");
+
+        try {
+            $app['db']->delete('rider', ['id' => $id]);
+            unlink(__DIR__ . $file['path']);
+            $status = [
+                'type' => 'success',
+                'message' => 'Документ успешно удален',
+            ];
+            return new JsonResponse($status);
+        } catch (\Exception $e) {
+            $status = [
+                'type' => 'warning',
+                'message' => $e->getMessage(),
+            ];
+            return new JsonResponse($status);
+        }
+
+
+    })
+    ->bind('delete_rider');
 
 $app->run();
