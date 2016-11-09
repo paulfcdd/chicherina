@@ -138,8 +138,10 @@ $app
 
 $app
     ->get('/контакты', function () use ($app) {
+		$contacts = $app['db']->fetchAll("SELECT * FROM contacts");
         return $app['twig']->render('contacts.twig', [
             'title' => 'Контакты',
+			'contacts' => $contacts,
         ]);
     })
     ->bind('contacts');

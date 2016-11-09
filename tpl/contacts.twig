@@ -1,15 +1,24 @@
 {% extends 'base.twig' %}
 
 {% block title %}
-    {{ title }}
+	{{ title }}
 {% endblock %}
 
 {% block content %}
-    <div class="contacts">
-        <div class="container">
-            <p>
-                контакты
-            </p>
-        </div>
-    </div>
+	<div class="contacts">
+		<div class="container">
+			<div class="row">
+				{% for contact in contacts%}
+					<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+						<blockquote>
+							<h2>{{ contact.position }}</h2>
+							<p><i class="fa fa-user"></i>&nbsp;{{ contact.firstname }}&nbsp;{{ contact.lastname }}</p>
+							<p><i class="fa fa-phone"></i>&nbsp;{{ contact.phone }}</p>
+							<p><i class="fa fa-at"></i>&nbsp;{{ contact.email }}</p>
+						</blockquote>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock %}
