@@ -97,7 +97,9 @@
 
                         </div>
 
-                        <div class="tab-pane" id="contacts">Settings Tab.</div>
+                        <div class="tab-pane" id="contacts">
+                            {% include 'dashboard/contacts/contacts.twig' %}
+                        </div>
 
                         <div class="tab-pane" id="rider">
                             {% include 'dashboard/rider/rider.twig' %}
@@ -112,6 +114,7 @@
     {% include 'dashboard/tour/modals/add_tour.twig' %}
     {% include 'dashboard/photos/modals/add_album.twig' %}
     {% include 'dashboard/rider/modals/add_rider.twig' %}
+    {% include 'dashboard/contacts/modals/add_contact.twig' %}
 {% endblock %}
 
 {% block footer %}

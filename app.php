@@ -236,6 +236,7 @@ $app
         $tours = $app['db']->fetchAll("SELECT * from tours");
         $albums = $app['db']->fetchAll("SELECT * FROM albums");
         $rider = $app['db']->fetchAll("SELECT * FROM rider");
+		$contacts = $app['db']->fetchAll("SELECT * FROM contacts");
         
         return $app['twig']->render('dashboard.twig', [
             'title' => 'Админинстрирование сайта',
@@ -243,6 +244,7 @@ $app
             'tours' => $tours,
             'albums' => $albums,
             'riders' => $rider,
+			'contacts' => $contacts,
         ]);
     })
     ->bind('dashboard');
@@ -360,7 +362,7 @@ $app
 
         } catch (\Exception $e) {
             $status = [
-                'type' => 'success',
+                'type' => 'danger',
                 'message' => $e->getMessage(),
             ];
             return new JsonResponse($status);
@@ -526,5 +528,50 @@ $app
 
     })
     ->bind('delete_rider');
+
+$app
+	->post('/add_contact', function (Request $request) use($app) {
+		$position = trim($request->get('position'));
+		$firstname = trim($request->get('firstname'));
+		$lastname = trim($request->get('lastname'));
+		$phone = trim($request->get('phone'));
+		$email = trim($request->get('email'));
+		$status[] = '';
+
+		try {
+			$app['db']->insert(
+				'contacts', [
+					'position' => $position,
+					'firstname' => $firstname,
+					'lastname' => $lastname,
+					'phone' => $phone,
+					'email' => $email,
+				]
+			);
+
+			$status = [
+				'type' => 'success',
+				'message' => 'Контакт успешно добавлен',
+			];
+			return new JsonResponse($status);
+
+		} catch (\Exception $e) {
+			$status = [
+				'type' => 'danger',
+				'message' => $e->getMessage(),
+			];
+			return new JsonResponse($status);
+		}
+	})
+	->bind('add_contact');
+
+
+$app
+	->post('/delete_contact', function () use($app) {
+		$id = $_POST['contact_id'];
+		$app['db']->delete('contacts', ['id'=>$id]);
+		return $app->redirect($app["url_generator"]->generate('dashboard'));
+	})
+	->bind('delete_contact');
 
 $app->run();
