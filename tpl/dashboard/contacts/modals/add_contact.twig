@@ -1,0 +1,53 @@
+<div id="addContact" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Новый контакт</h4>
+			</div>
+			<form>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="position">Должность</label>
+						<input type="text" name="position" id="position" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="firstname">Имя</label>
+						<input type="text" name="firstname" id="firstname" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="lastname">Фамилия</label>
+						<input type="text" name="lastname" id="lastname" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="phone">Телефон</label>
+						<input type="text" name="phone" id="phone" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="email">E-mail</label>
+						<input type="text" name="email" id="email" class="form-control">
+					</div>
+
+					<input type="text" id="path" value="{{ path('add_contact') }}" hidden>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<span class="fa fa-close"></span>&nbsp;Отменить
+					</button>
+					<button type="button" class="btn btn-success"
+							onclick="addContact(this.form)">
+						<span class="fa fa-plus"></span>&nbsp;Добавить
+					</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>

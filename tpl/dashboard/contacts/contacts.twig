@@ -1,0 +1,53 @@
+{% if contacts is empty %}
+	<div class="alert alert-warning"><strong>Внимание!</strong>&nbsp;Нет добавленных контактов.</div>
+{% else %}
+	<div class="info-message alert" hidden></div>
+
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Должность</th>
+			<th>Имя</th>
+			<th>Фамилия</th>
+			<th>Телефон</th>
+			<th>Email</th>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for contact in contacts %}
+			<tr>
+				<td>{{ contact.position }}</td>
+				<td>{{ contact.firstname }}</td>
+				<td>{{ contact.lastname }}</td>
+				<td>{{ contact.phone }}</td>
+				<td>{{ contact.email }}</td>
+				<td>
+					<button type="button"
+							class="btn btn-success"
+							data-toggle="modal"
+							data-target="#{{ contact.id }}"
+							data-tooltip="tooltip" title="Редактировать">
+						<span class="fa fa-edit"></span>
+					</button>
+				</td>
+				<td>
+					<form action="{{ path('delete_contact') }}" method="post">
+						<button type="submit"
+								class="btn btn-danger"
+								name="contact_id"
+								value="{{ contact.id }}"
+								data-tooltip="tooltip" title="Удалить">
+							<span class="fa fa-trash"></span>
+						</button>
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addContact">
+	<i class="fa fa-plus"></i>&nbsp;Добавить
+</button>
