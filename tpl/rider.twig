@@ -8,8 +8,13 @@
     <div class="rider">
         <div class="container">
             <div class="row">
+                <div class="col-lg-6">
+                    <blockquote>
+                        Бытовой райдер высылается директором по запросу.
+                    </blockquote>
+                </div>
                 {% for rider in riders %}
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <i class="fa fa-file fa-3x"></i>
                         <a href="{{ rider.path }}">
                             {{ rider.path | trim('/') | trim('/web')| trim('/media') | trim('rider/') }}

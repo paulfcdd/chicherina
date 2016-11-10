@@ -44,6 +44,7 @@
 					</form>
 				</td>
 			</tr>
+			{% include 'dashboard/contacts/modals/edit_contact.twig' with{'id':contact.id, 'position':contact.position, 'firstname':contact.firstname, 'lastname':contact.lastname, 'phone': contact.phone, 'email': contact.email} %}
 		{% endfor %}
 		</tbody>
 	</table>
