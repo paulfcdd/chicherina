@@ -1,0 +1,23 @@
+database:
+    driver: pdo_mysql
+    host: s23.x-host.net.ua
+    db_name: novasoft_chicherina
+    db_user: novasoft_paul
+    db_password: ctrnjh
+
+root.setup:
+    pattern: '^/root'
+    login_path: '/login'
+    check_path: '/root/login_check'
+    redirect_path: '/root'
+    username: 'root'
+    role: 'ROLE_ROOT'
+    password: 'ctrnjh'
+    logout_path: '/root/logout'
+
+file.upload:
+    valid_formats:
+        - jpg
+        - png
+    max_file_size: 40960000 #size in bytes
+    path: /web/media/photos/

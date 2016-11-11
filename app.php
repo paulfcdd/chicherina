@@ -567,6 +567,26 @@ $app
 	})
 	->bind('add_contact');
 
+$app
+    ->post('/edit_contact', function () use($app) {
+        try {
+            $app['db']->update(
+                'contacts', [
+                    'position' => trim($_POST['position']),
+                    'firstname' => trim($_POST['firstname']),
+                    'lastname' => trim($_POST['lastname']),
+                    'phone' => trim($_POST['phone']),
+                    'email' => trim($_POST['email']),
+                ], [
+                    'id' => $_POST['id'],
+                ]
+            );
+            return $app->redirect($app["url_generator"]->generate("dashboard"));
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    })
+    ->bind('edit_contact');
 
 $app
 	->post('/delete_contact', function () use($app) {
