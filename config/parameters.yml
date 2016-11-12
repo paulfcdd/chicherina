@@ -1,7 +1,7 @@
 database:
     driver: pdo_mysql
     host: s23.x-host.net.ua
-    db_name: novasoft_chicherina
+    db_name: novasoft_chicherinaDev
     db_user: novasoft_paul
     db_password: ctrnjh
 

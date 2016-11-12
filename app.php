@@ -116,7 +116,25 @@ $app
 $app
     ->get('/фото', function () use ($app) {
         $getAlbumsQuery = "SELECT * FROM albums";
-        $albums = $app['db']->fetchAll($getAlbumsQuery);
+        $albumsFetched = $app['db']->fetchAll($getAlbumsQuery);
+        $albums = [];
+
+        foreach ($albumsFetched as $album) {
+            $albumId = $album['id'];
+            $photosInAlbum = $app['db']->fetchAll("SELECT * FROM photos WHERE album_id='$albumId'");
+            $countPhotos = count($photosInAlbum);
+            array_push($album, $countPhotos);
+            array_push($albums, $album);
+        }
+
+        $albums = array_map(function ($album){
+            return [
+                'id' => $album['id'],
+                'name' => $album['name'],
+                'date' => $album['date'],
+                'countPhotos'=>$album[0],
+            ];
+        }, $albums);
 
         return $app['twig']->render('photos.twig', [
             'albums' => $albums,
@@ -277,6 +295,21 @@ $app
     ->bind('delete_tour');
 
 $app
+    ->post('/delete_photo', function () use($app) {
+        $id = $_POST['deletePhoto'];
+        $albumId = $_POST['albumId'];
+        $file = $app['db']->fetchAssoc("SELECT name FROM photos WHERE id = '$id'");
+        try {
+            $app['db']->delete('photos', ['id' => $id]);
+            unlink(__DIR__ . $file['name']);
+            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    })
+    ->bind('delete_photo');
+
+$app
     ->post('/edit_admin', function () use ($app) {
         return new \Symfony\Component\HttpFoundation\Response('kek');
     })
@@ -417,14 +450,13 @@ function uploadFiles(array $files, int $max_file_size, array $valid_formats, str
 
 $app
     ->post('/upload_photo', function () use ($app) {
-
         $albumId = $_POST['albumId'];
         $valid_formats = $app['config']['file.upload']['valid_formats'];
         $max_file_size = intval($app['config']['file.upload']['max_file_size']);
         $path = $app['config']['file.upload']['path'];
 
         $file_upload = uploadFiles($_FILES['photos'], $max_file_size,$valid_formats, $path);
-        
+
         if (is_array($file_upload)) {
 
             for ($i = 0; $i < count($file_upload); $i++) {
@@ -438,25 +470,10 @@ $app
             }
             return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
         } else {
-            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId, 'error' => 'error']));
+            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
         }
     })
     ->bind('upload_photo');
-
-$app
-    ->post('/delete_photo', function () use($app) {
-        $id = $_POST['deletePhoto'];
-        $albumId = $_POST['albumId'];
-        $file = $app['db']->fetchAssoc("SELECT name FROM photos WHERE id = '$id'");
-        try {
-            $app['db']->delete('photos', ['id' => $id]);
-            unlink(__DIR__ . $file['name']);
-            return $app->redirect($app["url_generator"]->generate("album", ['id' => $albumId]));
-        } catch (\Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    })
-    ->bind('delete_photo');
 
 $app
     ->post('/delete_album', function (Request $request) use($app) {
