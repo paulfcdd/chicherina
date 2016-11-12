@@ -14,6 +14,19 @@ html,
 body {
   height: 100%;
 }
+html .photo-view .modal-body img,
+body .photo-view .modal-body img {
+  max-height: 30em;
+  margin: 0 auto;
+}
+html .photo-view .modal-footer,
+body .photo-view .modal-footer {
+  text-align: center;
+}
+html .photo-view .modal-footer a:hover,
+body .photo-view .modal-footer a:hover {
+  text-decoration: none;
+}
 html .modal-content,
 body .modal-content {
   border-radius: 0;
@@ -145,12 +158,30 @@ html .wrapper .band .container,
 body .wrapper .band .container {
   padding: 2em 0 2em 0 !important;
 }
+@media only screen and (max-width: 767px) {
+  html .wrapper .band .container .row,
+  body .wrapper .band .container .row {
+    margin: 0;
+  }
+}
 html .wrapper .band .container .title,
 body .wrapper .band .container .title {
   text-transform: uppercase;
   font-size: 16pt;
   font-weight: 600;
   padding-bottom: 2em;
+}
+@media only screen and (max-width: 767px) {
+  html .wrapper .band .container .title,
+  body .wrapper .band .container .title {
+    padding-bottom: 1em;
+  }
+}
+@media only screen and (max-width: 767px) {
+  html .wrapper .band .container .band-list .info-card,
+  body .wrapper .band .container .band-list .info-card {
+    margin-bottom: 25px;
+  }
 }
 html .wrapper .band .container .band-list .info-card .singer-photo,
 body .wrapper .band .container .band-list .info-card .singer-photo {
@@ -182,6 +213,12 @@ body .wrapper .band .container .band-list .info-card .singer-social {
   list-style: none;
   padding: 0;
   margin-top: 25px;
+}
+@media only screen and (max-width: 767px) {
+  html .wrapper .band .container .band-list .info-card .singer-social,
+  body .wrapper .band .container .band-list .info-card .singer-social {
+    margin-top: 0 !important;
+  }
 }
 html .wrapper .band .container .band-list .info-card .singer-social a,
 body .wrapper .band .container .band-list .info-card .singer-social a {
@@ -281,20 +318,6 @@ body .wrapper .footer .container .social#vk:hover {
 html .wrapper .footer .container .social#youtube:hover,
 body .wrapper .footer .container .social#youtube:hover {
   color: #cc181e;
-}
-@media only screen and (max-width: 767px) {
-  .wrapper .band .container .title {
-    padding-bottom: 1em !important;
-  }
-  .wrapper .band .container .row {
-    margin: 0;
-  }
-  .wrapper .band .container .band-list .info-card {
-    margin-bottom: 25px;
-  }
-  .wrapper .band .container .band-list .info-card .singer-social {
-    margin-top: 0 !important;
-  }
 }
 code {
   font-size: 80%;

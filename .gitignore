@@ -2,3 +2,4 @@
 vendor/
 logs/
 web/media/photos/**
+config/parameters.yml

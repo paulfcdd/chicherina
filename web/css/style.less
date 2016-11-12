@@ -1,3 +1,9 @@
+@mobile: ~"only screen and (max-width: 767px)";
+@mobile-landscape: ~"only screen and (max-width: 767px) and (orientation: landscape)";
+@tablet: ~"only screen and (min-width: 768px) and (max-width: 992px)";
+@desktop: ~"only screen and (min-width: 993px) and (max-width: 1599px)";
+@hdscreen: ~"only screen and (min-width: 1600px)";
+
 @font-face {
   font-family: font-light;
   src: url("../fonts/OpenSans-Light.ttf");
@@ -16,6 +22,24 @@
 html,
 body {
   height: 100%;
+
+  .photo-view {
+    .modal-body {
+      img {
+        max-height: 30em;
+        margin: 0 auto;
+      }
+    }
+    .modal-footer {
+      text-align: center;
+
+      a {
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+  }
 
   .modal-content {
     border-radius: 0;
@@ -143,16 +167,26 @@ body {
       .container {
         padding: 2em 0 2em 0 !important;
 
+        .row {
+          @media @mobile {
+            margin: 0;
+          }
+        }
         .title {
           text-transform: uppercase;
           font-size: 16pt;
           font-weight: 600;
           padding-bottom: 2em;
+          @media @mobile {
+            padding-bottom: 1em;
+          }
         }
 
         .band-list {
           .info-card {
-
+            @media @mobile {
+              margin-bottom: 25px;
+            }
             .singer-photo {
               margin-bottom: 10px;
               img {
@@ -185,6 +219,9 @@ body {
               list-style: none;
               padding: 0;
               margin-top: 25px;
+              @media @mobile {
+                margin-top: 0 !important;
+              }
               a {
                 position: relative;
                 display: inline-block;
@@ -286,38 +323,32 @@ body {
   }
 }
 
-@mobile: ~"only screen and (max-width: 767px)";
-@mobile-landscape: ~"only screen and (max-width: 767px) and (orientation: landscape)";
-@tablet: ~"only screen and (min-width: 768px) and (max-width: 992px)";
-@desktop: ~"only screen and (min-width: 993px) and (max-width: 1599px)";
-@hdscreen: ~"only screen and (min-width: 1600px)";
-
-@media @mobile {
-  .wrapper {
-    .band {
-      .container {
-
-        .title {
-          padding-bottom: 1em !important;
-        }
-
-        .row {
-          margin: 0;
-        }
-
-        .band-list {
-          .info-card {
-            margin-bottom: 25px;
-
-            .singer-social {
-              margin-top: 0 !important;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+//@media @mobile {
+//  .wrapper {
+//    .band {
+//      .container {
+//
+//        .title {
+//          //padding-bottom: 1em !important;
+//        }
+//
+//        .row {
+//          margin: 0;
+//        }
+//
+//        .band-list {
+//          .info-card {
+//            margin-bottom: 25px;
+//
+//            .singer-social {
+//              margin-top: 0 !important;
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
 
 code {
   font-size: 80%;
