@@ -17,6 +17,24 @@ html,
 body {
   height: 100%;
 
+  .photo-view {
+    .modal-body {
+      img {
+        max-height: 30em;
+        margin: 0 auto;
+      }
+    }
+    .modal-footer {
+      text-align: center;
+
+      a {
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
   .modal-content {
     border-radius: 0;
   }

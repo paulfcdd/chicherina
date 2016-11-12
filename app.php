@@ -1,8 +1,10 @@
 <?php
 include_once __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . '/app/services/UserProvider.php';
+include_once __DIR__ . '/app/services/AdminProvider.php';
 
 use Services\UserProvider;
+use Services\AdminProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

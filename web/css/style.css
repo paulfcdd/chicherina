@@ -14,6 +14,19 @@ html,
 body {
   height: 100%;
 }
+html .photo-view .modal-body img,
+body .photo-view .modal-body img {
+  max-height: 30em;
+  margin: 0 auto;
+}
+html .photo-view .modal-footer,
+body .photo-view .modal-footer {
+  text-align: center;
+}
+html .photo-view .modal-footer a:hover,
+body .photo-view .modal-footer a:hover {
+  text-decoration: none;
+}
 html .modal-content,
 body .modal-content {
   border-radius: 0;
