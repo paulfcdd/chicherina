@@ -19,5 +19,7 @@ file.upload:
     valid_formats:
         - jpg
         - png
+        - JPG
+        - jpeg
     max_file_size: 40960000 #size in bytes
     path: /web/media/photos/
