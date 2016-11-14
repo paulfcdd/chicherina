@@ -5,3 +5,4 @@ web/media/photos/**
 config/parameters.yml
 web/docs/
 web/media/
+config/
