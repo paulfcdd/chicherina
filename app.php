@@ -95,8 +95,8 @@ $app
 
 $app
     ->get('/афиша', function () use ($app) {
-        $sql = 'SELECT * FROM tours';
-        $tours = $app['db']->fetchAll($sql);
+//        $sql = 'SELECT * FROM tours';
+        $tours = $app['db']->fetchAll("SELECT * FROM tours ORDER BY date");
         return $app['twig']->render('tour.twig', [
             'tours' => $tours,
             'title' => 'Афиша',
